@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BookOwner</string>
+    <string name="name">책임자</string>
+    <string name="sub_name">"읽다 죽어도 멋져 보일 책을 항상 읽으라."</string>
+    <string name="sub_name2">P. J. 오루크</string>
 </resources>
