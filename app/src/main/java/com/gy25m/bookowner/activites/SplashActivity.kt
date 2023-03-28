@@ -1,10 +1,11 @@
-package com.gy25m.bookowner
+package com.gy25m.bookowner.activites
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.gy25m.bookowner.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
     fun moveJoin(){
         Handler(Looper.getMainLooper()).postDelayed(
             kotlinx.coroutines.Runnable {
-            val intent=Intent(this,JoinActivity::class.java)
+            val intent=Intent(this, JoinActivity::class.java)
             startActivity(intent)
             finish()
         },10)

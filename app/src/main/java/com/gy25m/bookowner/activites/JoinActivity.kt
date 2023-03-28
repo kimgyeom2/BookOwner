@@ -1,9 +1,8 @@
-package com.gy25m.bookowner
+package com.gy25m.bookowner.activites
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import com.gy25m.bookowner.databinding.ActivityJoinBinding
 
 class JoinActivity : AppCompatActivity() {
@@ -13,10 +12,10 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent=Intent(this,LoginActivity::class.java)
+            val intent=Intent(this, LoginActivity::class.java)
             startActivity(intent)}
         binding.btnJoin.setOnClickListener {
-            val intent=Intent(this,MembershipActivity::class.java)
+            val intent=Intent(this, MembershipActivity::class.java)
             startActivity(intent)}
     }
 }

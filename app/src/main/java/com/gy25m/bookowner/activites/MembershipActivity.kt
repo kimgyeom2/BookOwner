@@ -1,11 +1,12 @@
-package com.gy25m.bookowner
+package com.gy25m.bookowner.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gy25m.bookowner.R
 
-class MainActivity : AppCompatActivity() {
+class MembershipActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_membership)
     }
 }
