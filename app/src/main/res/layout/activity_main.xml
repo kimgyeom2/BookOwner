@@ -33,26 +33,32 @@
         android:layout_centerHorizontal="true"
         android:hint=" 도서명 검색"
         android:textColorHint="#858383"
-        android:fontFamily="@font/main"/>
+        android:fontFamily="@font/main"
+        android:inputType="text"
+        android:privateImeOptions="defaultInputmode=korean"/>
 
     <ImageView
+        android:id="@+id/iv_search"
         android:layout_width="45dp"
         android:layout_height="48dp"
-        android:src="@drawable/search"
+        android:src="@drawable/icon_search"
         android:layout_marginTop="56dp"
         android:layout_marginLeft="332dp"
         android:padding="8dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="490dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bnv"
         android:layout_below="@id/et_search"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/white" >
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
