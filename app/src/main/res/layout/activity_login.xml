@@ -1,15 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activites.MembershipActivity">
+    tools:context=".activites.MembershipActivity"
+    android:background="#EAF7FF">
+
+    <ImageView
+        android:id="@+id/iv_before"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/before"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="12dp"/>
 
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/book"
         android:layout_marginTop="8dp"/>
@@ -20,9 +29,76 @@
         android:fontFamily="@font/app_name"
         android:text="@string/name"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"/>
 
+    <TextView
+        android:id="@+id/tv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@color/white"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_join_id"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="103dp"
+        android:hint="ID를 입력하세요"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_join_pw"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:hint="Password를 입력하세요"
+        app:endIconMode="password_toggle"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="Log-in"
+        android:background="@drawable/login_btn"
+        android:textAllCaps="false"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/login_join"
+        android:layout_below="@id/tv_bg"
+        />
+
+    <TextView
+        android:id="@+id/nomem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원이 아니신가요?"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_login"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/login_join"/>
 </RelativeLayout>
