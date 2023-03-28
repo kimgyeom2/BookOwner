@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bnv_tab1"
+        android:title="홈"
+        android:icon="@drawable/home"/>
+
+    <item android:id="@+id/bnv_tab2"
+        android:title="관심있는"
+        android:icon="@drawable/favorite"/>
+
+    <item android:id="@+id/bnv_tab3"
+        android:title="의사소통"
+        android:icon="@drawable/chat"/>
+
+    <item android:id="@+id/bnv_tab4"
+        android:title="독서기록"
+        android:icon="@drawable/mybook"/>
+</menu>

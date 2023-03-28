@@ -17,5 +17,8 @@ class JoinActivity : AppCompatActivity() {
         binding.btnJoin.setOnClickListener {
             val intent=Intent(this, MembershipActivity::class.java)
             startActivity(intent)}
+        binding.gomain.setOnClickListener{
+            val intent=Intent(this, MainActivity::class.java)
+            startActivity(intent)}
     }
 }

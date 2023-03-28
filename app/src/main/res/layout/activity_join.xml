@@ -97,4 +97,10 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:id="@+id/gomain"/>
 </RelativeLayout>
