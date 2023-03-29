@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@+id/iv_before"
-        android:layout_width="100dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:src="@drawable/before"
         android:adjustViewBounds="true"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="26dp"
+        android:layout_alignLeft="@id/tv_bg"/>
 
     <ImageView
         android:id="@+id/app_logo"

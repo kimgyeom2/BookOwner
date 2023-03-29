@@ -25,38 +25,18 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"/>
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_name"
-        android:layout_centerHorizontal="true"
-        android:hint=" 도서명 검색"
-        android:textColorHint="#858383"
-        android:fontFamily="@font/main"
-        android:inputType="text"
-        android:privateImeOptions="defaultInputmode=korean"/>
-
-    <ImageView
-        android:id="@+id/iv_search"
-        android:layout_width="45dp"
-        android:layout_height="48dp"
-        android:src="@drawable/icon_search"
-        android:layout_alignBottom="@id/et_search"
-        android:layout_alignEnd="@id/et_search"
-        android:padding="8dp"/>
 
     <FrameLayout
         android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bnv"
-        android:layout_below="@id/et_search"
+        android:layout_below="@id/app_name"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@color/white" >
-    </FrameLayout>
+        android:layout_marginBottom="0dp"
+        android:background="@color/white"></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv"

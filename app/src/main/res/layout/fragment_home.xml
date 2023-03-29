@@ -4,6 +4,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+     <EditText
+         android:id="@+id/et_search"
+         android:layout_width="360dp"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:hint=" 도서명 검색"
+         android:textColorHint="#858383"
+         android:fontFamily="@font/main"
+         android:inputType="text"
+         android:privateImeOptions="defaultInputmode=korean"/>
+
+     <ImageView
+         android:id="@+id/iv_search"
+         android:layout_width="45dp"
+         android:layout_height="48dp"
+         android:src="@drawable/icon_search"
+         android:layout_alignBottom="@id/et_search"
+         android:layout_alignEnd="@id/et_search"
+         android:padding="8dp"/>
+
      <androidx.appcompat.widget.AppCompatButton
          android:id="@+id/btn_best"
          android:layout_width="60dp"
@@ -11,6 +31,7 @@
          android:layout_marginLeft="16dp"
          android:layout_marginTop="8dp"
          android:layout_marginRight="8dp"
+         android:layout_below="@id/et_search"
          android:text="Best"
          android:textStyle="bold"
          android:textAllCaps="false"
@@ -20,11 +41,11 @@
          android:id="@+id/btn_new"
          android:layout_width="60dp"
          android:layout_height="30dp"
-         android:layout_marginTop="8dp"
          android:layout_toRightOf="@id/btn_best"
          android:text="New"
          android:textStyle="bold"
          android:textAllCaps="false"
+         android:layout_alignTop="@id/btn_best"
          android:background="@drawable/btn_best"/>
 
      <androidx.viewpager2.widget.ViewPager2
