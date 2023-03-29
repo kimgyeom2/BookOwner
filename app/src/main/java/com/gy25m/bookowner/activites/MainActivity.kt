@@ -3,6 +3,7 @@ package com.gy25m.bookowner.activites
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gy25m.bookowner.R
@@ -15,26 +16,37 @@ import kotlinx.coroutines.selects.select
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        val fragments= arrayOf(HomeFragment(),FavorFragment(),ChatFragment(),MyBookFragment())
-        supportFragmentManager.beginTransaction().add(R.id.fragment_layout,fragments[0]).commit()
-
-        binding.bnv.setOnItemSelectedListener{
-            if (it.itemId==R.id.bnv_tab1) supportFragmentManager.beginTransaction().replace(R.id.fragment_layout,fragments[0]).commit()
-            else if (it.itemId==R.id.bnv_tab2) supportFragmentManager.beginTransaction().replace(R.id.fragment_layout,fragments[1]).commit()
-            else if (it.itemId==R.id.bnv_tab3) supportFragmentManager.beginTransaction().replace(R.id.fragment_layout,fragments[2]).commit()
-            else if (it.itemId==R.id.bnv_tab4) supportFragmentManager.beginTransaction().replace(R.id.fragment_layout,fragments[3]).commit()
-            return@setOnItemSelectedListener true
-        }
 
         binding.ivSearch.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
+        bnvControl()
     }
+
+    private fun bnvControl(){
+        binding.bnv.run {
+            setOnItemSelectedListener {
+                when(it.itemId){
+                    R.id.bnv_tab1 -> changeFragment(HomeFragment())
+                    R.id.bnv_tab2 -> changeFragment(FavorFragment())
+                    R.id.bnv_tab3 -> changeFragment(ChatFragment())
+                    R.id.bnv_tab4 -> changeFragment(MyBookFragment())
+                }
+                true
+            }
+            selectedItemId=R.id.bnv_tab1
+        }
+    }
+    fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentLayout.id, fragment).commit()
+    }
+
+
 }

@@ -1,12 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Home Fargment"
-        android:textSize="50sp"/>
+     <androidx.appcompat.widget.AppCompatButton
+         android:id="@+id/btn_best"
+         android:layout_width="60dp"
+         android:layout_height="30dp"
+         android:layout_marginLeft="16dp"
+         android:layout_marginTop="8dp"
+         android:layout_marginRight="8dp"
+         android:text="Best"
+         android:textStyle="bold"
+         android:textAllCaps="false"
+         android:background="@drawable/btn_best"/>
+
+     <androidx.appcompat.widget.AppCompatButton
+         android:id="@+id/btn_new"
+         android:layout_width="60dp"
+         android:layout_height="30dp"
+         android:layout_marginTop="8dp"
+         android:layout_toRightOf="@id/btn_best"
+         android:text="New"
+         android:textStyle="bold"
+         android:textAllCaps="false"
+         android:background="@drawable/btn_best"/>
+
+     <androidx.viewpager2.widget.ViewPager2
+         android:id="@+id/viewpager"
+         android:layout_width="match_parent"
+         android:layout_height="170dp"
+         android:layout_below="@id/btn_best"
+         android:layout_marginStart="8dp"
+         android:layout_marginTop="6dp"
+         android:layout_marginEnd="8dp"
+         android:layout_marginBottom="4dp"
+         android:background="@drawable/bg_vp"
+         android:padding="8dp">
+     </androidx.viewpager2.widget.ViewPager2>
+
+     <TextView
+         android:id="@+id/tv_editor"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="에디터 추천"
+         android:layout_below="@id/viewpager"
+          android:fontFamily="@font/main2bold"
+          android:textColor="@color/black"
+         android:layout_marginLeft="16dp"
+         android:layout_marginBottom="4dp"
+         android:layout_marginTop="8dp"/>
+     <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+          android:src="@drawable/recommend"
+          android:layout_toRightOf="@id/tv_editor"
+          android:layout_below="@id/viewpager"
+          android:layout_marginTop="3dp"
+          android:layout_marginLeft="2dp"/>
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/recycler_editor"
+         android:layout_width="match_parent"
+         android:layout_height="170dp"
+         android:layout_below="@id/tv_editor"
+         android:layout_marginStart="8dp"
+         android:layout_marginEnd="8dp"
+         android:layout_marginBottom="4dp"
+         android:background="#EAF7FF"
+         android:padding="8dp"
+         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+         android:orientation="horizontal"/>
+
+     <TextView
+         android:id="@+id/rank"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="명예의 전당"
+         android:layout_below="@id/recycler_editor"
+         android:fontFamily="@font/main2bold"
+         android:textColor="@color/black"
+         android:layout_marginLeft="16dp"
+         android:layout_marginBottom="4dp"
+         android:layout_marginTop="8dp"/>
+     <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/rank"
+         android:layout_toRightOf="@id/rank"
+         android:layout_below="@id/recycler_editor"
+         android:layout_marginTop="3dp"
+         android:layout_marginLeft="3dp"/>
+
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_below="@id/rank"
+         android:layout_marginStart="8dp"
+         android:layout_marginEnd="8dp"
+         android:layout_marginBottom="8dp"
+         android:background=" #EAF7FF" />
+
 </RelativeLayout>

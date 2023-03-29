@@ -6,8 +6,9 @@ import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
+
+    val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding=ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 

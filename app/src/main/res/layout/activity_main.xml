@@ -29,7 +29,7 @@
         android:id="@+id/et_search"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_below="@id/app_name"
         android:layout_centerHorizontal="true"
         android:hint=" 도서명 검색"
         android:textColorHint="#858383"
@@ -42,8 +42,8 @@
         android:layout_width="45dp"
         android:layout_height="48dp"
         android:src="@drawable/icon_search"
-        android:layout_marginTop="56dp"
-        android:layout_marginLeft="332dp"
+        android:layout_alignBottom="@id/et_search"
+        android:layout_alignEnd="@id/et_search"
         android:padding="8dp"/>
 
     <FrameLayout
@@ -54,7 +54,7 @@
         android:layout_below="@id/et_search"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:background="@color/white" >
     </FrameLayout>
 

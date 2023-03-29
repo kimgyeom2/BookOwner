@@ -6,8 +6,9 @@ import android.os.Bundle
 import com.gy25m.bookowner.databinding.ActivityJoinBinding
 
 class JoinActivity : AppCompatActivity() {
+
+    val binding by lazy {ActivityJoinBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding by lazy {ActivityJoinBinding.inflate(layoutInflater)}
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 

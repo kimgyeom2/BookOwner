@@ -6,8 +6,9 @@ import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivityMembershipBinding
 
 class MembershipActivity : AppCompatActivity() {
+
+    val binding by lazy {ActivityMembershipBinding.inflate(layoutInflater)  }
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding=ActivityMembershipBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.ivBefore.setOnClickListener { finish() }
