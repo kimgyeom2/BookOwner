@@ -42,13 +42,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
+            android:id="@+id/et_reviewreal"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:hint="Review"
+            android:inputType="textMultiLine"
+            android:maxEms="50"
             android:textColorHint="@color/black"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:maxEms="50"/>
+            android:textSize="16sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

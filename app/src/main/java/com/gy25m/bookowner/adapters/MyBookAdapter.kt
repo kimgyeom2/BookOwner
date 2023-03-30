@@ -22,7 +22,5 @@ class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adap
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.tvTitle.text=list[position].title
         holder.binding.tvReview.text=list[position].review
-
-
     }
 }
