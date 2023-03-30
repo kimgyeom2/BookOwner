@@ -14,5 +14,5 @@
 
     <item android:id="@+id/bnv_tab4"
         android:title="독서기록"
-        android:icon="@drawable/mybook"/>
+        android:icon="@drawable/icon_mybook"/>
 </menu>

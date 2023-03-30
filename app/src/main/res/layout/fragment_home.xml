@@ -75,7 +75,7 @@
      <ImageView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-          android:src="@drawable/recommend"
+          android:src="@drawable/icon_recommend"
           android:layout_toRightOf="@id/tv_editor"
           android:layout_below="@id/viewpager"
           android:layout_marginTop="3dp"
@@ -107,7 +107,7 @@
      <ImageView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:src="@drawable/rank"
+         android:src="@drawable/icon_rank"
          android:layout_toRightOf="@id/rank"
          android:layout_below="@id/recycler_editor"
          android:layout_marginTop="3dp"

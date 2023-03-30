@@ -21,6 +21,6 @@ class ViewPagerAdapter(var context: Context,var items:MutableList<BestItem>) : A
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        TODO("Not yet implemented")
+
     }
 }

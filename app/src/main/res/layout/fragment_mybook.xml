@@ -12,9 +12,80 @@
         android:background="#EAF7FF"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        android:textColor="@color/black"
+        android:fontFamily="@font/app_name"
+        android:textStyle="bold"
+        android:layout_alignLeft="@id/bg"
+        android:layout_alignTop="@id/bg"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="12dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tv_read_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 님의 독서 레벨 : "
+        android:textColor="@color/black"
+        android:fontFamily="@font/app_name"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/tv_id"
+        android:layout_alignTop="@id/tv_id"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tv_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="@color/black"
+        android:fontFamily="@font/app_name"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/tv_read_level"
+        android:layout_alignTop="@id/tv_id"
+        android:textSize="20sp"/>
+    <TextView
+    android:id="@+id/tv_read_grade"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="독서등급 : "
+    android:textColor="@color/black"
+    android:fontFamily="@font/app_name"
+    android:textStyle="bold"
+    android:layout_alignLeft="@id/tv_id"
+    android:layout_below="@id/tv_id"
+    android:layout_marginTop="12dp"
+    android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tv_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diamond"
+        android:textColor="#53B5E1"
+        android:fontFamily="@font/app_name"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/tv_read_grade"
+        android:layout_alignTop="@id/tv_read_grade"
+        android:textSize="20sp"/>
+
+
+    <Button
+        android:id="@+id/btn_info"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/icon_info"
+        android:layout_alignTop="@id/bg"
+        android:layout_alignEnd="@id/bg"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="6dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_mybook"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/bg"
@@ -23,6 +94,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        android:background="#EAF7FF"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
