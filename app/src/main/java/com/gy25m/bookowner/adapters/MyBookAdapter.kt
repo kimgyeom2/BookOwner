@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.gy25m.bookowner.databinding.RecycleritemMybookBinding
 import com.gy25m.bookowner.model.MyBookItem
 
@@ -22,5 +23,6 @@ class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adap
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.tvTitle.text=list[position].title
         holder.binding.tvReview.text=list[position].review
+        Glide.with(context).load(list[position].imgUrl).into(holder.binding.ivBookCover)
     }
 }

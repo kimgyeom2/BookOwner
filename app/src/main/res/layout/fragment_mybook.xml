@@ -42,7 +42,7 @@
         android:id="@+id/tv_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
+        android:text="0"
         android:textColor="@color/black"
         android:fontFamily="@font/app_name"
         android:textStyle="bold"
@@ -94,7 +94,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        android:background="#EAF7FF"
+        android:background="#FFFFFF"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
