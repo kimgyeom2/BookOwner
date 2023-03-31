@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivityMainBinding
 import com.gy25m.bookowner.fragments.ChatFragment
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
 
         bnvControl()
+
     }
 
     private fun bnvControl(){

@@ -95,7 +95,8 @@
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         android:background="#FFFFFF"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:stackFromEnd="true"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_book"

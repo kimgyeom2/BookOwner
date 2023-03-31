@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.gy25m.bookowner.databinding.RecycleritemMybookBinding
 import com.gy25m.bookowner.model.MyBookItem
 
 class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adapter<MyBookAdapter.VH>() {
+
     inner class VH(var binding:RecycleritemMybookBinding): ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -24,5 +27,6 @@ class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adap
         holder.binding.tvTitle.text=list[position].title
         holder.binding.tvReview.text=list[position].review
         Glide.with(context).load(list[position].imgUrl).into(holder.binding.ivBookCover)
+
     }
 }
