@@ -45,10 +45,12 @@ class MyBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dataLoad()
-
+        var infoDia=AlertDialog.Builder(requireContext()).setView(layoutInflater.inflate(R.layout.dialog_info,null)).create()
         binding.btnInfo.setOnClickListener{
-            AlertDialog.Builder(requireContext()).setView(layoutInflater.inflate(R.layout.dialog_info,null)).show()
+            infoDia.show()
         }
+        var lv=0
+        binding.tvLevel.text="$lv"
 
         var dialogBinding=DialogAddBookBinding.inflate(layoutInflater)
         val resultLauncher :ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),object :ActivityResultCallback<ActivityResult>{
@@ -63,7 +65,6 @@ class MyBookFragment : Fragment() {
         binding.addBook.setOnClickListener{
 
             dia.show()
-
             dialogBinding.ivMyImg.setOnClickListener {
                 val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
                 resultLauncher.launch(intent)
@@ -77,6 +78,10 @@ class MyBookFragment : Fragment() {
                 adapter.notifyItemInserted(list.size)
                 binding.recyclerMybook.scrollToPosition(0)
                 dataSave()
+                dialogBinding.etTitle.setText("")
+                dialogBinding.etReviewreal.setText("")
+                Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
+                binding.tvLevel.text="${lv+1}"
                 dia.dismiss()
 
             }
@@ -88,12 +93,12 @@ class MyBookFragment : Fragment() {
     fun dataSave(){
         var firestore=FirebaseFirestore.getInstance()
         var reviewRef:CollectionReference=firestore.collection("review")
-
         var reviews:MutableMap<String,String> = mutableMapOf()
         reviews.put("cover",G.imgUri!!.toString())
         reviews.put("title",G.title!!)
         reviews.put("text",G.review!!)
-        reviewRef.add(reviews)
+        reviewRef.document("MSG_"+System.currentTimeMillis()).set(reviews)
+        binding.recyclerMybook.scrollToPosition(list.size-1)
     }
 
     fun dataLoad(){
@@ -109,7 +114,7 @@ class MyBookFragment : Fragment() {
             }
             adapter=MyBookAdapter(requireContext(),list)
             binding.recyclerMybook.adapter=adapter
-            binding.recyclerMybook.scrollToPosition(list.size)
+            binding.recyclerMybook.scrollToPosition(list.size-1)
         }
     }
 }
