@@ -1,8 +1,10 @@
 package com.gy25m.bookowner.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -17,6 +19,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.CollectionReference
@@ -45,11 +48,25 @@ class MyBookFragment : Fragment() {
     }
 
 
-
+    @SuppressLint("ResourceAsColor")
+    override fun onResume() {
+        when(binding.tvLevel.text.toString().toInt()){
+            in 4..10->{
+                binding.tvGrade.setTextColor(R.color.silver) }
+            in 11..16 ->{
+                binding.tvGrade.setTextColor(R.color.gold) }
+            in 17..24->{
+                binding.tvGrade.setTextColor(R.color.platinum) }
+            25->{
+                binding.tvGrade.setTextColor(R.color.diamond) }
+        }
+        super.onResume()
+    }
     override fun onPause() {
         var pref= context?.getSharedPreferences("userLv",0)
         var editor=pref?.edit()
         editor?.putString("lv",binding.tvLevel.text.toString())
+        editor?.putString("grade",binding.tvGrade.text.toString())
         editor?.apply()
 
         super.onPause()
@@ -60,7 +77,9 @@ class MyBookFragment : Fragment() {
         dataLoad()
         var pref= context?.getSharedPreferences("userLv",0)
         var a=pref?.getString("lv","0")
+        var b=pref?.getString("grade","Bronze")
         binding.tvLevel.text=a
+        binding.tvGrade.text=b
 
 
         var infoDia=AlertDialog.Builder(requireContext()).setView(layoutInflater.inflate(R.layout.dialog_info,null)).create()
@@ -88,29 +107,41 @@ class MyBookFragment : Fragment() {
             }
 
             dialogBinding.btnConfirm.setOnClickListener {
-                G.title=dialogBinding.etTitle.text.toString()
-                G.review=dialogBinding.etReviewreal.text.toString()
-                list.add(MyBookItem(G.imgUri!!,G.title!!,G.review!!))
-
-                adapter.notifyItemInserted(list.size)
-                binding.recyclerMybook.scrollToPosition(0)
-
-                dialogBinding.etTitle.setText("")
-                dialogBinding.etReviewreal.setText("")
-                Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
+//                G.title=dialogBinding.etTitle.text.toString()
+//                G.review=dialogBinding.etReviewreal.text.toString()
+//                list.add(MyBookItem(G.imgUri!!,G.title!!,G.review!!))
+//
+//                adapter.notifyItemInserted(list.size)
+//                binding.recyclerMybook.scrollToPosition(0)
+//
+//                dialogBinding.etTitle.setText("")
+//                dialogBinding.etReviewreal.setText("")
+//                Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
 
                 lvUp()
-                dataSave()
-                dia.dismiss()
+                //dataSave()
+                //dia.dismiss()
             }
 
             dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     fun lvUp(){
         var lv=binding.tvLevel.text.toString().toInt()+1
         binding.tvLevel.text=lv.toString()
+        if (binding.tvLevel.text.toString().toInt() in 4..10) {
+            binding.tvGrade.text="Silver"
+            binding.tvGrade.setTextColor(R.color.silver)}
+        else if (binding.tvLevel.text.toString().toInt() in 11..16) {
+            binding.tvGrade.text="Gold"
+            binding.tvGrade.setTextColor(R.color.gold)}
+        else if (binding.tvLevel.text.toString().toInt() in 17..24) {
+            binding.tvGrade.text="Platinum"
+            binding.tvGrade.setTextColor(R.color.platinum)}
+        else  {binding.tvGrade.text="Diamond"
+            binding.tvGrade.setTextColor(R.color.diamond)}
     }
 
     fun dataSave(){
