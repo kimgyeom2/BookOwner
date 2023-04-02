@@ -2,9 +2,12 @@ package com.gy25m.bookowner.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.telephony.TelephonyManager.ModemErrorException
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +28,11 @@ import com.gy25m.bookowner.databinding.DialogAddBookBinding
 import com.gy25m.bookowner.databinding.FragmentMybookBinding
 import com.gy25m.bookowner.model.MyBookItem
 import org.checkerframework.checker.units.qual.A
+import java.util.prefs.Preferences
 
 class MyBookFragment : Fragment() {
 
     private lateinit var binding: FragmentMybookBinding
-
     var list: MutableList<MyBookItem> = mutableListOf()
     lateinit var adapter:MyBookAdapter
     override fun onCreateView(
@@ -41,16 +44,30 @@ class MyBookFragment : Fragment() {
         return binding.root
     }
 
+
+
+    override fun onPause() {
+        var pref= context?.getSharedPreferences("userLv",0)
+        var editor=pref?.edit()
+        editor?.putString("lv",binding.tvLevel.text.toString())
+        editor?.apply()
+
+        super.onPause()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         dataLoad()
+        var pref= context?.getSharedPreferences("userLv",0)
+        var a=pref?.getString("lv","0")
+        binding.tvLevel.text=a
+
+
         var infoDia=AlertDialog.Builder(requireContext()).setView(layoutInflater.inflate(R.layout.dialog_info,null)).create()
         binding.btnInfo.setOnClickListener{
             infoDia.show()
         }
-        var lv=0
-        binding.tvLevel.text="$lv"
+
 
         var dialogBinding=DialogAddBookBinding.inflate(layoutInflater)
         val resultLauncher :ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),object :ActivityResultCallback<ActivityResult>{
@@ -58,9 +75,9 @@ class MyBookFragment : Fragment() {
                 if (result?.resultCode == Activity.RESULT_CANCELED) return
                 G.imgUri= result?.data?.data!!
                 Glide.with(this@MyBookFragment).load(G.imgUri).into(dialogBinding.ivMyImg)
-
             }
         })
+
         var dia=AlertDialog.Builder(requireContext()).setView(dialogBinding.root).create()
         binding.addBook.setOnClickListener{
 
@@ -77,17 +94,23 @@ class MyBookFragment : Fragment() {
 
                 adapter.notifyItemInserted(list.size)
                 binding.recyclerMybook.scrollToPosition(0)
-                dataSave()
+
                 dialogBinding.etTitle.setText("")
                 dialogBinding.etReviewreal.setText("")
                 Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
-                binding.tvLevel.text="${lv+1}"
-                dia.dismiss()
 
+                lvUp()
+                dataSave()
+                dia.dismiss()
             }
 
             dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
         }
+    }
+
+    fun lvUp(){
+        var lv=binding.tvLevel.text.toString().toInt()+1
+        binding.tvLevel.text=lv.toString()
     }
 
     fun dataSave(){
@@ -99,6 +122,7 @@ class MyBookFragment : Fragment() {
         reviews.put("text",G.review!!)
         reviewRef.document("MSG_"+System.currentTimeMillis()).set(reviews)
         binding.recyclerMybook.scrollToPosition(list.size-1)
+
     }
 
     fun dataLoad(){

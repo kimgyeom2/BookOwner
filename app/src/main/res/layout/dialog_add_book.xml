@@ -31,7 +31,8 @@
         android:layout_marginTop="4dp"
         android:textColorHint="@color/black"
         android:maxEms="20"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:inputType="text"/>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_review"
         android:layout_width="300dp"

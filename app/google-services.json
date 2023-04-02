@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "545696205555",
-    "project_id": "bookowner-89874",
-    "storage_bucket": "bookowner-89874.appspot.com"
+    "project_number": "921169447516",
+    "project_id": "bookowner-6ddcc",
+    "storage_bucket": "bookowner-6ddcc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:545696205555:android:47f2486dcf6a8029a0c586",
+        "mobilesdk_app_id": "1:921169447516:android:3a80d27e332c6a141b3499",
         "android_client_info": {
           "package_name": "com.gy25m.bookowner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "545696205555-q2t0cs58l9q1itgla814mhfaju0k0coc.apps.googleusercontent.com",
+          "client_id": "921169447516-jmfdm6bd0iflot4en6o3ek79g0p7nuda.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBmzg5sNKPF9OPHO1Jy0WDufZg1AmcNg2Q"
+          "current_key": "AIzaSyApLQG3X1MoWsk_O3dTR8FIh_Vaa1-m5qw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "545696205555-q2t0cs58l9q1itgla814mhfaju0k0coc.apps.googleusercontent.com",
+              "client_id": "921169447516-jmfdm6bd0iflot4en6o3ek79g0p7nuda.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
