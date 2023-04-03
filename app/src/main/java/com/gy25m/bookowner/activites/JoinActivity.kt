@@ -13,13 +13,14 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent=Intent(this, LoginActivity::class.java)
-            startActivity(intent)}
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
         binding.btnJoin.setOnClickListener {
-            val intent=Intent(this, MembershipActivity::class.java)
-            startActivity(intent)}
+            startActivity(Intent(this, MembershipActivity::class.java))
+            finish()
+            }
         binding.gomain.setOnClickListener{
-            val intent=Intent(this, MainActivity::class.java)
-            startActivity(intent)}
+            startActivity(Intent(this, MainActivity::class.java))}
     }
 }

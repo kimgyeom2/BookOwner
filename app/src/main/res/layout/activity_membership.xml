@@ -59,6 +59,7 @@
         app:counterMaxLength="10">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -75,6 +76,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_pw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
@@ -93,6 +95,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_pw2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
@@ -115,7 +118,8 @@
         />
 
     <Button
-        android:layout_width="62dp"
+        android:id="@+id/btn_check"
+        android:layout_width="64dp"
         android:layout_height="50dp"
         android:text="확인"
         android:textSize="15sp"

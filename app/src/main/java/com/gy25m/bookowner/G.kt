@@ -7,5 +7,8 @@ class G {
         var imgUri:Uri?=null
         var title:String?=null
         var review:String?=null
+        var userId:String?=null
+        var userPw:String?=null
+        var userPw2:String?=null
     }
 }

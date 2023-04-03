@@ -1,9 +1,18 @@
 package com.gy25m.bookowner.activites
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivitySearchBinding
+import com.gy25m.bookowner.model.AladinApiResponce
+import com.gy25m.bookowner.network.RetrofitApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class SearchActivity : AppCompatActivity() {
 
@@ -13,5 +22,31 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.ivBefore.setOnClickListener{finish()}
+
+        // 검색어
+        var bookName=intent.getStringExtra("bookName")
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("https://openapi.naver.com")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitService=retrofit.create(RetrofitApiService::class.java)
+        val call: Call<AladinApiResponce> = retrofitService.searchBook(bookName ?:"")
+
+        call.enqueue(object : Callback<AladinApiResponce>{
+            override fun onResponse(
+                call: Call<AladinApiResponce>,
+                response: Response<AladinApiResponce>
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<AladinApiResponce>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }

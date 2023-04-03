@@ -52,16 +52,17 @@ class MyBookFragment : Fragment() {
     override fun onResume() {
         when(binding.tvLevel.text.toString().toInt()){
             in 4..10->{
-                binding.tvGrade.setTextColor(R.color.silver) }
+                binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))}
             in 11..16 ->{
-                binding.tvGrade.setTextColor(R.color.gold) }
+                binding.tvGrade.setTextColor(Color.parseColor("#F4E23C")) }
             in 17..24->{
-                binding.tvGrade.setTextColor(R.color.platinum) }
+                binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))}
             25->{
-                binding.tvGrade.setTextColor(R.color.diamond) }
+                binding.tvGrade.setTextColor(Color.parseColor("#53B5E1")) }
         }
         super.onResume()
     }
+
     override fun onPause() {
         var pref= context?.getSharedPreferences("userLv",0)
         var editor=pref?.edit()
@@ -107,41 +108,47 @@ class MyBookFragment : Fragment() {
             }
 
             dialogBinding.btnConfirm.setOnClickListener {
-//                G.title=dialogBinding.etTitle.text.toString()
-//                G.review=dialogBinding.etReviewreal.text.toString()
-//                list.add(MyBookItem(G.imgUri!!,G.title!!,G.review!!))
-//
-//                adapter.notifyItemInserted(list.size)
-//                binding.recyclerMybook.scrollToPosition(0)
-//
-//                dialogBinding.etTitle.setText("")
-//                dialogBinding.etReviewreal.setText("")
-//                Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
+                G.title=dialogBinding.etTitle.text.toString()
+                G.review=dialogBinding.etReviewreal.text.toString()
+                if (G.imgUri !=null && dialogBinding.etTitle.text.toString()!="" && dialogBinding.etReviewreal.text.toString()!="" ){
+                    list.add(MyBookItem(G.imgUri!!,G.title!!,G.review!!))
+                    adapter.notifyItemInserted(list.size)
+                    binding.recyclerMybook.scrollToPosition(0)
 
-                lvUp()
-                //dataSave()
-                //dia.dismiss()
+                    dialogBinding.etTitle.text=null
+                    dialogBinding.etReviewreal.text=null
+                    Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
+
+                    lvUp()
+                    dataSave()
+                    dia.dismiss()
+                }
+                else{
+                    Toast.makeText(requireContext(), "항목을 모두 채워주세요", Toast.LENGTH_SHORT).show()
+                }
             }
-
             dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
         }
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     fun lvUp(){
         var lv=binding.tvLevel.text.toString().toInt()+1
         binding.tvLevel.text=lv.toString()
-        if (binding.tvLevel.text.toString().toInt() in 4..10) {
-            binding.tvGrade.text="Silver"
-            binding.tvGrade.setTextColor(R.color.silver)}
-        else if (binding.tvLevel.text.toString().toInt() in 11..16) {
-            binding.tvGrade.text="Gold"
-            binding.tvGrade.setTextColor(R.color.gold)}
-        else if (binding.tvLevel.text.toString().toInt() in 17..24) {
-            binding.tvGrade.text="Platinum"
-            binding.tvGrade.setTextColor(R.color.platinum)}
-        else  {binding.tvGrade.text="Diamond"
-            binding.tvGrade.setTextColor(R.color.diamond)}
+        if (binding.tvLevel.text.toString().toInt() == 4) {
+            binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))
+            binding.tvGrade.text="Silver" }
+        else if (binding.tvLevel.text.toString().toInt() ==11) {
+            binding.tvGrade.setTextColor(Color.parseColor("#F4E23C"))
+            binding.tvGrade.text="Gold" }
+        else if (binding.tvLevel.text.toString().toInt() ==17) {
+            binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))
+            binding.tvGrade.text="Platinum"}
+        else if (binding.tvLevel.text.toString().toInt() ==25){
+            binding.tvGrade.setTextColor(Color.parseColor("#53B5E1"))
+            binding.tvGrade.text="Diamond"
+        }
+
     }
 
     fun dataSave(){

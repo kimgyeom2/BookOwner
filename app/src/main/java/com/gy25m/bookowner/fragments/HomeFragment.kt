@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
 
         binding.ivSearch.setOnClickListener {
             val intent = Intent(activity,SearchActivity::class.java)
+            intent.putExtra("bookName",binding.etSearch.text.toString())
             startActivity(intent)
         }
 
