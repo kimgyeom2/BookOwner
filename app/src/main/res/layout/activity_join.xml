@@ -12,7 +12,7 @@
         android:layout_width="180dp"
         android:layout_height="170dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="130dp"
         android:adjustViewBounds="true"
         android:src="@drawable/book" />
     <TextView
@@ -24,7 +24,7 @@
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="276dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -34,7 +34,7 @@
         android:text="@string/sub_name"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="304dp"
+        android:layout_below="@id/app_name"
         android:fontFamily="@font/app_name2"
         android:textStyle="bold"/>
 
@@ -45,7 +45,7 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="324dp"
+        android:layout_below="@id/app_name2"
         android:fontFamily="@font/app_name2"
         android:textStyle="bold"/>
 
@@ -53,10 +53,10 @@
         android:id="@+id/btn_login"
         android:layout_width="330dp"
         android:layout_height="50dp"
-        android:layout_below="@id/app_name2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
         android:background="@drawable/login_btn"
+        android:layout_above="@id/btn_join"
+        android:layout_marginBottom="24dp"
         android:text="Log-in"
         android:textSize="16sp"
         android:textColor="@color/white"
@@ -71,11 +71,11 @@
         android:text="Join Membership"
         android:background="@drawable/join_btn"
         android:textAllCaps="false"
-        android:layout_marginTop="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="56dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:fontFamily="@font/login_join"
-        android:layout_below="@id/btn_login"
         />
 
     <TextView
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:text="이미 회원이신가요?"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="482dp"
+        android:layout_above="@id/btn_login"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"/>
@@ -93,8 +93,14 @@
         android:layout_height="wrap_content"
         android:text="처음 오셨나요?"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="556dp"
+        android:layout_above="@id/btn_join"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:id="@+id/gomain"/>
 </RelativeLayout>

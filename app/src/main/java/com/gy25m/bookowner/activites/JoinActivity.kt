@@ -6,8 +6,9 @@ import android.os.Bundle
 import com.gy25m.bookowner.databinding.ActivityJoinBinding
 
 class JoinActivity : AppCompatActivity() {
+
+    val binding by lazy {ActivityJoinBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding by lazy {ActivityJoinBinding.inflate(layoutInflater)}
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -16,6 +17,9 @@ class JoinActivity : AppCompatActivity() {
             startActivity(intent)}
         binding.btnJoin.setOnClickListener {
             val intent=Intent(this, MembershipActivity::class.java)
+            startActivity(intent)}
+        binding.gomain.setOnClickListener{
+            val intent=Intent(this, MainActivity::class.java)
             startActivity(intent)}
     }
 }

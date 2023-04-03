@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/iv_myImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon_add"
+        android:scaleType="fitXY"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_vp"/>
+    <TextView
+        android:id="@+id/tv_addImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 추가"
+        android:textColor="@color/black"
+        android:layout_below="@id/iv_myImg"
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"/>
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Title"
+        android:layout_below="@id/tv_addImg"
+        android:layout_marginTop="4dp"
+        android:textColorHint="@color/black"
+        android:maxEms="20"
+        android:textSize="20sp"
+        android:inputType="text"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_review"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/et_title"
+        android:layout_centerHorizontal="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/et_reviewreal"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:hint="Review"
+            android:inputType="textMultiLine"
+            android:maxEms="50"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:layout_marginLeft="8dp"
+        android:layout_alignRight="@id/et_title"
+        android:layout_below="@id/et_review"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:layout_toLeftOf="@id/btn_confirm"
+        android:layout_below="@id/et_review"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"/>
+
+
+</RelativeLayout>
