@@ -56,9 +56,11 @@ class MembershipActivity : AppCompatActivity() {
                     var reviews: MutableMap<String, Any> = snapshot.data
                     if (reviews.get("id").toString() == binding.etId.text.toString()) {
                         Toast.makeText(this, "아이디 중복", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
                     } else {
                         Toast.makeText(this, "사용가능", Toast.LENGTH_SHORT).show()
                         check=true
+                        return@addOnSuccessListener
                     }
 
                 }

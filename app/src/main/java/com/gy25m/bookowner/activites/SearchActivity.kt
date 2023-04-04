@@ -3,7 +3,12 @@ package com.gy25m.bookowner.activites
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.gy25m.bookowner.R
+import com.gy25m.bookowner.adapters.SearchAdapter
 import com.gy25m.bookowner.databinding.ActivitySearchBinding
 import com.gy25m.bookowner.model.AladinApiResponce
 import com.gy25m.bookowner.network.RetrofitApiService
@@ -27,24 +32,27 @@ class SearchActivity : AppCompatActivity() {
         var bookName=intent.getStringExtra("bookName")
 
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://openapi.naver.com")
+            .baseUrl("http://www.aladin.co.kr")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val retrofitService=retrofit.create(RetrofitApiService::class.java)
-        val call: Call<AladinApiResponce> = retrofitService.searchBook(bookName ?:"")
+        val call: Call<AladinApiResponce> = retrofitService.searchBook(bookName!!,"ttbrlarua72021535001")
 
         call.enqueue(object : Callback<AladinApiResponce>{
             override fun onResponse(
                 call: Call<AladinApiResponce>,
                 response: Response<AladinApiResponce>
             ) {
-                TODO("Not yet implemented")
+                val ala=response.body()
+                binding.recyclerSearch.adapter=SearchAdapter(this@SearchActivity,ala!!.item)
+
             }
 
             override fun onFailure(call: Call<AladinApiResponce>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(this@SearchActivity, "mmmmmmmmmmmmmmm", Toast.LENGTH_SHORT).show()
+                Log.i("zzzzzzzzzzz",t.message.toString())
             }
 
         })
