@@ -7,5 +7,6 @@ data class Book(
     var title:String,
     var author:String,
     var pubDate:String,
-    var description:String
+    var description:String,
+    var categoryName:String
 )

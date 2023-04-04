@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
 
         // 검색어
         var bookName=intent.getStringExtra("bookName")
-
+        binding.tvSearchResult.text="'${bookName}' 검색 결과입니다"
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://www.aladin.co.kr")
             .addConverterFactory(ScalarsConverterFactory.create())

@@ -27,21 +27,30 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivSearch.setOnClickListener {
-            val intent = Intent(activity,SearchActivity::class.java)
-            intent.putExtra("bookName",binding.etSearch.text.toString())
-            startActivity(intent)
+        binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
+            search()
+            false
         }
+        binding.ivSearch.setOnClickListener {search()}
 
         binding.btnBest.isSelected=true
         binding.btnBest.setOnClickListener {
-            binding.btnBest.isSelected=true
+            it.isSelected=true
             binding.btnNew.isSelected=false
         }
         binding.btnNew.setOnClickListener {
-            binding.btnNew.isSelected=true
+            it.isSelected=true
             binding.btnBest.isSelected=false
         }
 
     }
+
+    fun search(){
+        val intent = Intent(activity,SearchActivity::class.java)
+        intent.putExtra("bookName",binding.etSearch.text.toString())
+        startActivity(intent)
+        binding.etSearch.text.clear()
+        binding.etSearch.clearFocus()
+    }
+
 }

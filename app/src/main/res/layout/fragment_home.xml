@@ -9,11 +9,11 @@
          android:layout_width="360dp"
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
-         android:hint=" 도서명 검색"
+         android:hint=" 제목+저자 검색"
          android:textColorHint="#858383"
          android:fontFamily="@font/main"
          android:inputType="text"
-         android:privateImeOptions="defaultInputmode=korean"/>
+         android:imeOptions="actionSearch" />
 
      <ImageView
          android:id="@+id/iv_search"
@@ -80,6 +80,7 @@
           android:layout_below="@id/viewpager"
           android:layout_marginTop="3dp"
           android:layout_marginLeft="2dp"/>
+
      <androidx.recyclerview.widget.RecyclerView
          android:id="@+id/recycler_editor"
          android:layout_width="match_parent"
