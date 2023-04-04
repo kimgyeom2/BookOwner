@@ -1,58 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="180dp"
+    android:padding="8dp">
     <TextView
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
         android:background="#EAF7FF"
         android:layout_centerVertical="true"/>
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@id/iv_book_cover"
-        android:textSize="18sp"
-        android:text="BookName"
-        android:textColor="@color/black" />
+        android:layout_alignTop="@id/iv_book_cover"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/iv_book_cover"
+        android:textSize="16sp"
+        android:text="메스커레이드 이브"
+        android:fontFamily="@font/main2bold"
+        android:textColor="@color/black"
+        android:layout_marginEnd="24dp"/>
     <TextView
         android:id="@+id/tv_author"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
-        android:layout_alignLeft="@id/tv_title"
-        android:textSize="18sp"
-        android:text="author"
-        android:textColor="@color/black" />
+        android:layout_alignStart="@id/tv_title"
+        android:textSize="12sp"
+        android:text="앤서니 브라운"
+        android:textColor="@color/black"
+        android:layout_marginEnd="24dp"/>
     <TextView
         android:id="@+id/tv_pubdate"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_author"
-        android:layout_alignLeft="@id/tv_title"
-        android:textSize="18sp"
-        android:text="author"
-        android:textColor="@color/black" />
-    <TextView
-        android:id="@+id/tv_description"
+        android:layout_alignStart="@id/tv_title"
+        android:textSize="13sp"
+        android:text="2023-04-04"
+        android:textColor="@color/black"
+        android:layout_marginEnd="24dp"/>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_below="@id/tv_pubdate"
-        android:layout_alignLeft="@id/tv_title"
-        android:textSize="18sp"
-        android:text="description"
-        android:textColor="@color/black" />
+        android:layout_alignStart="@id/tv_title"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="7dp">
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </androidx.core.widget.NestedScrollView>
+
     <ImageView
         android:id="@+id/iv_book_cover"
         android:layout_width="100dp"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:src="#AAC5E3 "
         android:scaleType="fitXY"/>
 
