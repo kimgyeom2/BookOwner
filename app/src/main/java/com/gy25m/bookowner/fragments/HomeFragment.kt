@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.gy25m.bookowner.R
+import com.gy25m.bookowner.activites.MainActivity
 import com.gy25m.bookowner.activites.SearchActivity
 import com.gy25m.bookowner.databinding.FragmentFavorBinding
 import com.gy25m.bookowner.databinding.FragmentHomeBinding
@@ -27,6 +30,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var main=requireActivity() as MainActivity
+        main.supportFragmentManager.beginTransaction().replace(binding.frame.id,BestFragment()).commit()
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
             search()
             false
@@ -37,10 +42,12 @@ class HomeFragment : Fragment() {
         binding.btnBest.setOnClickListener {
             it.isSelected=true
             binding.btnNew.isSelected=false
+            main.supportFragmentManager.beginTransaction().replace(binding.frame.id,BestFragment()).commit()
         }
         binding.btnNew.setOnClickListener {
             it.isSelected=true
             binding.btnBest.isSelected=false
+            main.supportFragmentManager.beginTransaction().replace(binding.frame.id,NewFragment()).commit()
         }
 
     }

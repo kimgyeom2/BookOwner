@@ -5,10 +5,12 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.gy25m.bookowner.R
+import com.gy25m.bookowner.databinding.DialogItemdetailBinding
 import com.gy25m.bookowner.databinding.RecycleritemSearchBinding
 import com.gy25m.bookowner.model.Book
 
@@ -34,7 +36,12 @@ class SearchAdapter(var context:Context,var items:MutableList<Book>) : Adapter<S
             it.isSelected = !it.isSelected
          }
         holder.itemView.setOnClickListener {
-            AlertDialog.Builder(context).setView(LayoutInflater.from(context).inflate(R.layout.dialog_itemdetail,null,false))
+            var dialogBinding=DialogItemdetailBinding.inflate(LayoutInflater.from(context))
+            dialogBinding.tvTitle.text=item.title
+            var des=HtmlCompat.fromHtml(item.description,HtmlCompat.FROM_HTML_MODE_COMPACT).toString()
+            dialogBinding.detailDescription.text=des
+            Glide.with(context).load(item.cover).into(dialogBinding.detailCover)
+            AlertDialog.Builder(context).setView(dialogBinding.root).show()
         }
 
     }
