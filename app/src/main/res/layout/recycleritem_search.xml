@@ -12,13 +12,13 @@
 
     <ImageButton
         android:id="@+id/iv_favor"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignRight="@id/bg"
         android:layout_alignBottom="@id/bg"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_favorite"
+        android:background="@drawable/icon_add_interest"
         android:backgroundTint="@color/favor_color"/>
 
     <TextView

@@ -51,7 +51,7 @@
      <FrameLayout
          android:id="@+id/frame"
          android:layout_width="match_parent"
-         android:layout_height="170dp"
+         android:layout_height="168dp"
          android:layout_below="@id/btn_best"
          android:layout_marginStart="8dp"
          android:layout_marginTop="6dp"
@@ -66,7 +66,7 @@
          android:id="@+id/tv_editor"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:text="에디터 추천"
+         android:text="블로거 추천"
          android:layout_below="@id/frame"
           android:fontFamily="@font/main2bold"
           android:textColor="@color/black"
@@ -82,25 +82,26 @@
           android:layout_marginTop="3dp"
           android:layout_marginLeft="2dp"/>
 
-     <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/recycler_editor"
+     <FrameLayout
+         android:id="@+id/frame_reco"
          android:layout_width="match_parent"
-         android:layout_height="170dp"
+         android:layout_height="168dp"
          android:layout_below="@id/tv_editor"
          android:layout_marginStart="8dp"
          android:layout_marginEnd="8dp"
          android:layout_marginBottom="4dp"
          android:background="#EAF7FF"
-         android:padding="8dp"
          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-         android:orientation="horizontal"/>
+         android:orientation="horizontal"
+         android:paddingLeft="8dp"
+         android:paddingRight="8dp"/>
 
      <TextView
          android:id="@+id/rank"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="명예의 전당"
-         android:layout_below="@id/recycler_editor"
+         android:layout_below="@id/frame_reco"
          android:fontFamily="@font/main2bold"
          android:textColor="@color/black"
          android:layout_marginLeft="16dp"
@@ -111,7 +112,7 @@
          android:layout_height="wrap_content"
          android:src="@drawable/icon_rank"
          android:layout_toRightOf="@id/rank"
-         android:layout_below="@id/recycler_editor"
+         android:layout_below="@id/frame_reco"
          android:layout_marginTop="3dp"
          android:layout_marginLeft="3dp"/>
 

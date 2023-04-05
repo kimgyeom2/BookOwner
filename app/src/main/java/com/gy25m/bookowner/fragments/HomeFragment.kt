@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
         var main=requireActivity() as MainActivity
         main.supportFragmentManager.beginTransaction().replace(binding.frame.id,BestFragment()).commit()
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
+
             search()
             false
         }
@@ -49,11 +50,16 @@ class HomeFragment : Fragment() {
             binding.btnBest.isSelected=false
             main.supportFragmentManager.beginTransaction().replace(binding.frame.id,NewFragment()).commit()
         }
+        main.supportFragmentManager.beginTransaction().replace(binding.frameReco.id,RecommandFragment()).commit()
 
     }
 
     fun search(){
         val intent = Intent(activity,SearchActivity::class.java)
+        if (binding.etSearch.text.toString()==""){
+            Toast.makeText(requireActivity(), "검색어를 입력하세요", Toast.LENGTH_SHORT).show()
+            return
+        }
         intent.putExtra("bookName",binding.etSearch.text.toString())
         startActivity(intent)
         binding.etSearch.text.clear()

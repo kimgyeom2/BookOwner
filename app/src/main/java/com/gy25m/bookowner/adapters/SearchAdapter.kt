@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -31,13 +33,19 @@ class SearchAdapter(var context:Context,var items:MutableList<Book>) : Adapter<S
         holder.binding.tvPubdate.text=item.pubDate
         holder.binding.tvCategori.text=item.categoryName
         Glide.with(context).load(item.cover).into(holder.binding.ivBookCover)
-
+        
         holder.binding.ivFavor.setOnClickListener {
-            it.isSelected = !it.isSelected
+            Toast.makeText(context, "관심도서 추가!", Toast.LENGTH_SHORT).show()
+            var db=context.openOrCreateDatabase("interest", AppCompatActivity.MODE_PRIVATE,null)
+            db.execSQL("CREATE TABLE IF NOT EXISTS book(num INTEGER PRIMARY KEY AUTOINCREMENT,cover TEXT,title TEXT,description TEXT)")
+
          }
+
+
         holder.itemView.setOnClickListener {
             var dialogBinding=DialogItemdetailBinding.inflate(LayoutInflater.from(context))
-            dialogBinding.tvTitle.text=item.title
+            var tit=HtmlCompat.fromHtml(item.title,HtmlCompat.FROM_HTML_MODE_COMPACT).toString()
+            dialogBinding.tvTitle.text=tit
             var des=HtmlCompat.fromHtml(item.description,HtmlCompat.FROM_HTML_MODE_COMPACT).toString()
             dialogBinding.detailDescription.text=des
             Glide.with(context).load(item.cover).into(dialogBinding.detailCover)

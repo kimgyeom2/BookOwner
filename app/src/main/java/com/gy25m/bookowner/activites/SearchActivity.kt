@@ -12,6 +12,7 @@ import com.gy25m.bookowner.adapters.SearchAdapter
 import com.gy25m.bookowner.databinding.ActivitySearchBinding
 import com.gy25m.bookowner.model.AladinApiResponce
 import com.gy25m.bookowner.network.RetrofitApiService
+import com.gy25m.bookowner.network.RetrofitHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,30 +32,22 @@ class SearchActivity : AppCompatActivity() {
         // 검색어
         var bookName=intent.getStringExtra("bookName")
         binding.tvSearchResult.text="'${bookName}' 검색 결과입니다"
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://www.aladin.co.kr")
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val retrofitService=retrofit.create(RetrofitApiService::class.java)
-        val call: Call<AladinApiResponce> = retrofitService.searchBook(bookName!!,"ttbrlarua72021535001")
-
-        call.enqueue(object : Callback<AladinApiResponce>{
+        val retrofit:Retrofit=RetrofitHelper.getRetrofitInstance("http://www.aladin.co.kr")
+        val retrofitApiservice=retrofit.create(RetrofitApiService::class.java)
+        retrofitApiservice.searchBook(bookName!!,"ttbrlarua72021535001").enqueue(object : Callback<AladinApiResponce>{
             override fun onResponse(
                 call: Call<AladinApiResponce>,
                 response: Response<AladinApiResponce>
             ) {
                 val ala=response.body()
                 binding.recyclerSearch.adapter=SearchAdapter(this@SearchActivity,ala!!.item)
-
             }
-
             override fun onFailure(call: Call<AladinApiResponce>, t: Throwable) {
                 Toast.makeText(this@SearchActivity, "mmmmmmmmmmmmmmm", Toast.LENGTH_SHORT).show()
                 Log.i("zzzzzzzzzzz",t.message.toString())
             }
 
         })
+
     }
 }
