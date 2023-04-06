@@ -1,5 +1,6 @@
 package com.gy25m.bookowner.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,10 +24,20 @@ class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adap
         return list.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.binding.tvTitle.text=list[position].title
         holder.binding.tvReview.text=list[position].review
         Glide.with(context).load(list[position].imgUrl).into(holder.binding.ivBookCover)
 
+
+        holder.binding.btnDelete.setOnClickListener {
+            var firestore=FirebaseFirestore.getInstance()
+            var reviewRef=firestore.collection("review")
+
+
+            list.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 }

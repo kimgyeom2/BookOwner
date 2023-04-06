@@ -155,10 +155,12 @@ class MyBookFragment : Fragment() {
         var firestore=FirebaseFirestore.getInstance()
         var reviewRef:CollectionReference=firestore.collection("review")
         var reviews:MutableMap<String,String> = mutableMapOf()
+        var docpath="MSG_"+System.currentTimeMillis()
         reviews.put("cover",G.imgUri!!.toString())
         reviews.put("title",G.title!!)
         reviews.put("text",G.review!!)
-        reviewRef.document("MSG_"+System.currentTimeMillis()).set(reviews)
+        reviews.put("docpath",docpath)
+        reviewRef.document(docpath).set(reviews)
         binding.recyclerMybook.scrollToPosition(list.size-1)
 
     }

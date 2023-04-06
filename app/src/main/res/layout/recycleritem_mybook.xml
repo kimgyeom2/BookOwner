@@ -43,4 +43,13 @@
         android:textColor="@color/black"
         android:layout_marginRight="20dp"/>
 
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tv_title"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/icon_delete" />
+
 </RelativeLayout>

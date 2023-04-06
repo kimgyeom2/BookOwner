@@ -28,6 +28,8 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.ivBefore.setOnClickListener{finish()}
+        var db=openOrCreateDatabase("interest", AppCompatActivity.MODE_PRIVATE,null)
+        db.execSQL("CREATE TABLE IF NOT EXISTS book(num INTEGER PRIMARY KEY AUTOINCREMENT,cover TEXT,title TEXT,description TEXT)")
 
         // 검색어
         var bookName=intent.getStringExtra("bookName")

@@ -1,6 +1,7 @@
 package com.gy25m.bookowner.adapters
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -36,8 +37,8 @@ class SearchAdapter(var context:Context,var items:MutableList<Book>) : Adapter<S
         
         holder.binding.ivFavor.setOnClickListener {
             Toast.makeText(context, "관심도서 추가!", Toast.LENGTH_SHORT).show()
-            var db=context.openOrCreateDatabase("interest", AppCompatActivity.MODE_PRIVATE,null)
-            db.execSQL("CREATE TABLE IF NOT EXISTS book(num INTEGER PRIMARY KEY AUTOINCREMENT,cover TEXT,title TEXT,description TEXT)")
+            var db=context.openOrCreateDatabase("interest",MODE_PRIVATE,null)
+            db.execSQL("INSERT INTO book (cover,title,description) VALUES ('${item.cover}','${item.title}','${item.description}')")
 
          }
 

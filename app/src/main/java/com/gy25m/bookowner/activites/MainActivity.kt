@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         bnvControl()
-
+        openOrCreateDatabase("interest", MODE_PRIVATE,null)
     }
 
     private fun bnvControl(){
