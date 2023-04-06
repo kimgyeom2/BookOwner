@@ -2,6 +2,8 @@ package com.gy25m.bookowner.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -13,7 +15,8 @@ import com.gy25m.bookowner.databinding.RecycleritemMybookBinding
 import com.gy25m.bookowner.model.MyBookItem
 
 class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adapter<MyBookAdapter.VH>() {
-
+    var firestore=FirebaseFirestore.getInstance()
+    var reviewRef=firestore.collection("review")
     inner class VH(var binding:RecycleritemMybookBinding): ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -30,12 +33,13 @@ class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>) : Adap
         holder.binding.tvReview.text=list[position].review
         Glide.with(context).load(list[position].imgUrl).into(holder.binding.ivBookCover)
 
-
         holder.binding.btnDelete.setOnClickListener {
-            var firestore=FirebaseFirestore.getInstance()
-            var reviewRef=firestore.collection("review")
-
-
+            reviewRef.whereEqualTo("title",list[position].title).get().addOnSuccessListener {
+                for (snapshot in it){
+                    var aa:MutableMap<String,Any> = snapshot.data
+                    reviewRef.document(aa.get("docpath").toString()).delete()
+                }
+            }
             list.removeAt(position)
             notifyDataSetChanged()
         }
