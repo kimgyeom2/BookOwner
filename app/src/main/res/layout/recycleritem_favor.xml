@@ -47,9 +47,9 @@
         <ImageButton
             android:id="@+id/heart"
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="16dp"
             android:background="@drawable/icon_favorite_selected"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_favor_title"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="2dp"/>

@@ -15,9 +15,8 @@ import com.gy25m.bookowner.databinding.ActivityMembershipBinding
 import com.gy25m.bookowner.model.MyBookItem
 
 class MembershipActivity : AppCompatActivity() {
-
+    var check=0
     val binding by lazy {ActivityMembershipBinding.inflate(layoutInflater)  }
-    var check=false
     override fun onCreate(savedInstanceState: Bundle?) {
         var firestore=FirebaseFirestore.getInstance()
         super.onCreate(savedInstanceState)
@@ -25,46 +24,38 @@ class MembershipActivity : AppCompatActivity() {
         binding.ivBefore.setOnClickListener { finish() }
 
         binding.btnJoin.setOnClickListener {
-            G.userId=binding.etId.text.toString()
-            G.userPw=binding.etPw.text.toString()
-            G.userPw2=binding.etPw2.text.toString()
-
-
-            if (G.userId!!.length<10){
-                if (G.userId!="" && G.userPw2!="" && G.userPw==G.userPw2 && check){
-                    Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                    var reviewRef: CollectionReference =firestore.collection("userInfo")
-                    var infos:MutableMap<String,String> = mutableMapOf()
-                    infos.put("id", G.userId!!)
-                    infos.put("pw", G.userPw2!!)
-                    reviewRef.document("MSG_"+System.currentTimeMillis()).set(infos)
-                    startActivity(Intent(this,LoginActivity::class.java))
-                    finish()
-                }else{
-                    Toast.makeText(this, "모든 항목을 입력하세요", Toast.LENGTH_SHORT).show()
-                }
+            if (binding.etId.text.toString()=="" || binding.etPw.text.toString()=="" || binding.etPw2.text.toString()==""){
+                Toast.makeText(this, "모든 항목을 입력해주세요", Toast.LENGTH_SHORT).show() }
+            else if(check==0){
+                Toast.makeText(this, "ID중복확인을 해주세요", Toast.LENGTH_SHORT).show()
+            }else if (binding.etPw.text.toString()!=binding.etPw2.text.toString()){
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "ID가 너무김", Toast.LENGTH_SHORT).show()
+                var fire=FirebaseFirestore.getInstance()
+                var ref=fire.collection("userInfo")
+                var info:MutableMap<String,String> = mutableMapOf()
+                info.put("id",binding.etId.text.toString())
+                info.put("pw",binding.etPw2.text.toString())
+                ref.document(binding.etId.text.toString()).set(info)
+                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,LoginActivity::class.java))
+                finish()
             }
         }
+
 
         binding.btnCheck.setOnClickListener {
-            var firestore=FirebaseFirestore.getInstance()
-            var infos=firestore.collection("userInfo")
-            infos.get().addOnSuccessListener {
-                for (snapshot in it) {
-                    var reviews: MutableMap<String, Any> = snapshot.data
-                    if (reviews.get("id").toString() == binding.etId.text.toString()) {
-                        Toast.makeText(this, "아이디 중복", Toast.LENGTH_SHORT).show()
-                        return@addOnSuccessListener
-                    } else {
-                        Toast.makeText(this, "사용가능", Toast.LENGTH_SHORT).show()
-                        check=true
-                        return@addOnSuccessListener
-                    }
-
+            var fire=FirebaseFirestore.getInstance()
+            fire.collection("userInfo").whereEqualTo("id",binding.etId.text.toString()).get().addOnSuccessListener {
+                if(it.documents.size==0){
+                    Toast.makeText(this, "사용가능한 ID입니다", Toast.LENGTH_SHORT).show()
+                    check=1
+                }else{
+                    Toast.makeText(this, "중복된 ID입니다", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        } //btncheck
+
+
     }
 }

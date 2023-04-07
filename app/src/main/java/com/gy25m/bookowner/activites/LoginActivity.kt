@@ -19,37 +19,41 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         var firestore= FirebaseFirestore.getInstance()
-        var reviewRef=firestore.collection("userInfo")
+        var fire=firestore.collection("userInfo")
 
         binding.ivBefore.setOnClickListener{finish()}
         binding.nomem.setOnClickListener{
             intent= Intent(this,MembershipActivity::class.java)
-            startActivity(intent)}
+            startActivity(intent)
+            finish()}
 
             binding.btnLogin.setOnClickListener {
-                var id=binding.etId.text.toString()
-                var pw=binding.etPw.text.toString()
-                if (id!="" && pw!=""){
-                reviewRef.get().addOnSuccessListener {
-                 for (snapshot in it) {
-                        var infos: MutableMap<String, Any> = snapshot.data
-                        if (infos.get("id").toString() == id) {
-                            if(infos.get("pw").toString()==pw){
-                                startActivity(Intent(this,MainActivity::class.java))
-                                finish()
-                                return@addOnSuccessListener
-                            }else{
-                                Toast.makeText(this, "비밀번호가 일치하지않습니다", Toast.LENGTH_SHORT).show()
-                                return@addOnSuccessListener
+                if (binding.etId.text.toString() == "" || binding.etPw.text.toString() == "") {
+                    Toast.makeText(this, "모든 항목을 입력해주세요", Toast.LENGTH_SHORT).show()
+                } else {
+                    fire.whereEqualTo("id", binding.etId.text.toString()).get()
+                        .addOnSuccessListener {
+                            if (it.documents.size == 0) Toast.makeText(
+                                this,
+                                "일치하는 ID가 없습니다",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            else {
+                                for (snapshot in it) {
+                                    var aa: MutableMap<String, Any> = snapshot.data
+                                    if (aa.get("pw").toString() == binding.etPw.text.toString()) {
+                                        G.userId = binding.etId.text.toString()
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                        Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                                        finish()
+                                    } else Toast.makeText(
+                                        this,
+                                        "비밀번호가 일치하지 않습니다",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
-                        }else{
-                            Toast.makeText(this, "일치하는 아이디가 없습니다", Toast.LENGTH_SHORT).show()
-                            return@addOnSuccessListener
                         }
-                    }
-                } 
-              }else{
-                    Toast.makeText(this, "모든항목을 채워주세요", Toast.LENGTH_SHORT).show()
                 }
             }
         }

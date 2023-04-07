@@ -47,22 +47,6 @@ class MyBookFragment : Fragment() {
         return binding.root
     }
 
-
-    @SuppressLint("ResourceAsColor")
-    override fun onResume() {
-        when(binding.tvLevel.text.toString().toInt()){
-            in 4..10->{
-                binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))}
-            in 11..16 ->{
-                binding.tvGrade.setTextColor(Color.parseColor("#F4E23C")) }
-            in 17..24->{
-                binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))}
-            25->{
-                binding.tvGrade.setTextColor(Color.parseColor("#53B5E1")) }
-        }
-        super.onResume()
-    }
-
     override fun onPause() {
         var pref= context?.getSharedPreferences("userLv",0)
         var editor=pref?.edit()
@@ -75,7 +59,9 @@ class MyBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.tvId.text=G.userId
         dataLoad()
+        lv()
         var pref= context?.getSharedPreferences("userLv",0)
         var a=pref?.getString("lv","0")
         var b=pref?.getString("grade","Bronze")
@@ -133,27 +119,28 @@ class MyBookFragment : Fragment() {
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     fun lvUp(){
-        var lv=binding.tvLevel.text.toString().toInt()+1
-        binding.tvLevel.text=lv.toString()
-        if (binding.tvLevel.text.toString().toInt() == 4) {
+        binding.tvLevel.text=(binding.tvLevel.text.toString().toInt()+1).toString()
+    }
+    fun  lv(){
+        if (binding.tvLevel.text.toString().toInt() in 4 until 8) {
             binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))
             binding.tvGrade.text="Silver" }
-        else if (binding.tvLevel.text.toString().toInt() ==11) {
+        else if (binding.tvLevel.text.toString().toInt() in 8 until 13) {
             binding.tvGrade.setTextColor(Color.parseColor("#F4E23C"))
             binding.tvGrade.text="Gold" }
-        else if (binding.tvLevel.text.toString().toInt() ==17) {
+        else if (binding.tvLevel.text.toString().toInt() in 13 until 19) {
             binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))
             binding.tvGrade.text="Platinum"}
-        else if (binding.tvLevel.text.toString().toInt() ==25){
+        else if (binding.tvLevel.text.toString().toInt()>=30){
             binding.tvGrade.setTextColor(Color.parseColor("#53B5E1"))
             binding.tvGrade.text="Diamond"
         }
-
     }
+
 
     fun dataSave(){
         var firestore=FirebaseFirestore.getInstance()
-        var reviewRef:CollectionReference=firestore.collection("review")
+        var reviewRef:CollectionReference=firestore.collection("${G.userId}")
         var reviews:MutableMap<String,String> = mutableMapOf()
         var docpath="MSG_"+System.currentTimeMillis()
         reviews.put("cover",G.imgUri!!.toString())
@@ -167,7 +154,7 @@ class MyBookFragment : Fragment() {
 
     fun dataLoad(){
         var firestore=FirebaseFirestore.getInstance()
-        var reviewRef=firestore.collection("review")
+        var reviewRef=firestore.collection("${G.userId}")
         reviewRef.get().addOnSuccessListener {
             for (snapshot in it){
                 var reviews:MutableMap<String,Any> = snapshot.data
@@ -176,7 +163,7 @@ class MyBookFragment : Fragment() {
                 var text=reviews.get("text").toString()
                 list.add(MyBookItem(Uri.parse(cover),title!!,text!!))
             }
-            adapter=MyBookAdapter(requireContext(),list)
+            adapter=MyBookAdapter(requireActivity(),list)
             binding.recyclerMybook.adapter=adapter
             binding.recyclerMybook.scrollToPosition(list.size-1)
         }
