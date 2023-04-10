@@ -34,8 +34,10 @@ import org.checkerframework.checker.units.qual.A
 import java.util.prefs.Preferences
 
 class MyBookFragment : Fragment() {
-
+    private var firestore=FirebaseFirestore.getInstance()
+    private var reviewRef:CollectionReference=firestore.collection("${G.userId}")
     private lateinit var binding: FragmentMybookBinding
+    var reviews:MutableMap<String,String> = mutableMapOf()
     var list: MutableList<MyBookItem> = mutableListOf()
     lateinit var adapter:MyBookAdapter
     override fun onCreateView(
@@ -47,26 +49,13 @@ class MyBookFragment : Fragment() {
         return binding.root
     }
 
-    override fun onPause() {
-        var pref= context?.getSharedPreferences("userLv",0)
-        var editor=pref?.edit()
-        editor?.putString("lv",binding.tvLevel.text.toString())
-        editor?.putString("grade",binding.tvGrade.text.toString())
-        editor?.apply()
-
-        super.onPause()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         binding.tvId.text=G.userId
         dataLoad()
-        lv()
-        var pref= context?.getSharedPreferences("userLv",0)
-        var a=pref?.getString("lv","0")
-        var b=pref?.getString("grade","Bronze")
-        binding.tvLevel.text=a
-        binding.tvGrade.text=b
+
 
 
         var infoDia=AlertDialog.Builder(requireContext()).setView(layoutInflater.inflate(R.layout.dialog_info,null)).create()
@@ -104,8 +93,7 @@ class MyBookFragment : Fragment() {
                     dialogBinding.etTitle.text=null
                     dialogBinding.etReviewreal.text=null
                     Glide.with(requireContext()).load(R.drawable.icon_add).into(dialogBinding.ivMyImg)
-
-                    lvUp()
+                    lv()
                     dataSave()
                     dia.dismiss()
                 }
@@ -118,30 +106,15 @@ class MyBookFragment : Fragment() {
     }
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
-    fun lvUp(){
-        binding.tvLevel.text=(binding.tvLevel.text.toString().toInt()+1).toString()
+    fun lv(){
+        binding.tvLevel.text=list.size.toString()
+        grade()
     }
-    fun  lv(){
-        if (binding.tvLevel.text.toString().toInt() in 4 until 8) {
-            binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))
-            binding.tvGrade.text="Silver" }
-        else if (binding.tvLevel.text.toString().toInt() in 8 until 13) {
-            binding.tvGrade.setTextColor(Color.parseColor("#F4E23C"))
-            binding.tvGrade.text="Gold" }
-        else if (binding.tvLevel.text.toString().toInt() in 13 until 19) {
-            binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))
-            binding.tvGrade.text="Platinum"}
-        else if (binding.tvLevel.text.toString().toInt()>=30){
-            binding.tvGrade.setTextColor(Color.parseColor("#53B5E1"))
-            binding.tvGrade.text="Diamond"
-        }
-    }
+
 
 
     fun dataSave(){
-        var firestore=FirebaseFirestore.getInstance()
-        var reviewRef:CollectionReference=firestore.collection("${G.userId}")
-        var reviews:MutableMap<String,String> = mutableMapOf()
+
         var docpath="MSG_"+System.currentTimeMillis()
         reviews.put("cover",G.imgUri!!.toString())
         reviews.put("title",G.title!!)
@@ -149,6 +122,9 @@ class MyBookFragment : Fragment() {
         reviews.put("docpath",docpath)
         reviewRef.document(docpath).set(reviews)
         binding.recyclerMybook.scrollToPosition(list.size-1)
+
+        firestore.collection("userInfo").document("${G.userId}").update("lv",list.size)
+        firestore.collection("userInfo").document("${G.userId}").update("grade",binding.tvGrade.text)
 
     }
 
@@ -162,10 +138,30 @@ class MyBookFragment : Fragment() {
                 var title=reviews.get("title").toString()
                 var text=reviews.get("text").toString()
                 list.add(MyBookItem(Uri.parse(cover),title!!,text!!))
+                binding.tvLevel.text=list.size.toString()
+                grade()
             }
-            adapter=MyBookAdapter(requireActivity(),list)
+            adapter=MyBookAdapter(requireActivity(),list,binding)
             binding.recyclerMybook.adapter=adapter
             binding.recyclerMybook.scrollToPosition(list.size-1)
+        }
+    }
+    fun grade() {
+        if (list.size in 0 until 4) {
+            binding.tvGrade.setTextColor(Color.parseColor("#9E6613"))
+            binding.tvGrade.text = "Bronze"
+        }else if (list.size in 4 until 8) {
+            binding.tvGrade.setTextColor(Color.parseColor("#ACABAB"))
+            binding.tvGrade.text = "Silver"
+        } else if (list.size in 8 until 13) {
+            binding.tvGrade.setTextColor(Color.parseColor("#F4E23C"))
+            binding.tvGrade.text = "Gold"
+        } else if (list.size in 13 until 19) {
+            binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))
+            binding.tvGrade.text = "Platinum"
+        } else if (list.size >= 30) {
+            binding.tvGrade.setTextColor(Color.parseColor("#53B5E1"))
+            binding.tvGrade.text = "Diamond"
         }
     }
 }

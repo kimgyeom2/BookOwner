@@ -14,11 +14,9 @@ class JoinActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
-            finish()
         }
         binding.btnJoin.setOnClickListener {
             startActivity(Intent(this, MembershipActivity::class.java))
-            finish()
             }
         binding.gomain.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))}

@@ -18,7 +18,6 @@ class MembershipActivity : AppCompatActivity() {
     var check=0
     val binding by lazy {ActivityMembershipBinding.inflate(layoutInflater)  }
     override fun onCreate(savedInstanceState: Bundle?) {
-        var firestore=FirebaseFirestore.getInstance()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.ivBefore.setOnClickListener { finish() }
@@ -36,10 +35,14 @@ class MembershipActivity : AppCompatActivity() {
                 var info:MutableMap<String,String> = mutableMapOf()
                 info.put("id",binding.etId.text.toString())
                 info.put("pw",binding.etPw2.text.toString())
+                info.put("lv",""+0)
+                info.put("grade","")
                 ref.document(binding.etId.text.toString()).set(info)
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,LoginActivity::class.java))
+                var intent=Intent(this,LoginActivity::class.java)
+                startActivity(intent)
                 finish()
+
             }
         }
 

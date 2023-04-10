@@ -31,12 +31,12 @@ class FavorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var items= mutableListOf<FavorItem>()
         var db=requireActivity().openOrCreateDatabase("interest", AppCompatActivity.MODE_PRIVATE,null)
+        db.execSQL("CREATE TABLE IF NOT EXISTS book(num INTEGER PRIMARY KEY AUTOINCREMENT,cover TEXT,title TEXT,description TEXT)")
 
-
-        var cursor = db.rawQuery("SELECT * FROM book",null)
+        var cursor = db.rawQuery("SELECT * FROM book",null) ?: return
         var num=cursor.count
         cursor.moveToFirst()
-        if (cursor!=null){
+
         for (a in 0 until num) {
             var num = cursor.getInt(0)
             var cover = cursor.getString(1)
@@ -46,6 +46,7 @@ class FavorFragment : Fragment() {
             items.add(FavorItem(cover, title, des))
             cursor.moveToNext()
         }
-        binding.recyclerFavor.adapter=FavorAdapter(requireContext(),items)}
+        binding.recyclerFavor.adapter=FavorAdapter(requireContext(),items)
+
     }
 }
