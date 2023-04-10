@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="480dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:background="#EAF7FF">
+
+    <ImageView
+        android:id="@+id/iv_feed"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_vp"
+        android:src="@drawable/icon_add"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_review"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        android:layout_below="@id/iv_feed"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/et_feed"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/white"
+            android:hint="Review"
+            android:inputType="textMultiLine"
+            android:maxEms="50"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="확인"
+       android:layout_below="@id/et_review"
+        android:layout_alignRight="@id/et_review"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:layout_toLeftOf="@id/btn_confirm"
+        android:layout_marginRight="8dp"
+        android:layout_below="@id/et_review"
+        android:textSize="16sp"/>
+
+</RelativeLayout>
