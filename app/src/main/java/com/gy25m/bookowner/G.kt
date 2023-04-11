@@ -8,8 +8,7 @@ class G {
         var title:String?=null
         var review:String?=null
         var userId:String?=null
-        var userPw:String?=null
-        var userPw2:String?=null
-        var lv:Int?=0
+        var text:String?=null
+        var img:Uri?=null
     }
 }

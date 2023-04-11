@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="#EAF7FF"
     android:layout_gravity="center_horizontal"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="8dp">
 
     <TextView
         android:id="@+id/id"
@@ -21,15 +21,14 @@
         android:layout_height="270dp"
         android:layout_below="@id/id"
         android:scaleType="fitXY"
-        android:src="#BED4DD"
-        android:paddingRight="2dp"
-        android:paddingLeft="2dp"/>
+        android:src="#BED4DD" />
 
     <ImageView
         android:id="@+id/btn_ht"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/icon_favorite"
+        android:background="@drawable/icon_favorite"
+        android:backgroundTint="@color/ht"
         android:layout_marginLeft="6dp"
         android:layout_below="@+id/tv_chat" />
     <ImageView

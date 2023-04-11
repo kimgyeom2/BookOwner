@@ -97,12 +97,5 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"/>
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="400dp"
-        android:backgroundTint="@color/black"
-        android:id="@+id/gomain"/>
+
 </RelativeLayout>

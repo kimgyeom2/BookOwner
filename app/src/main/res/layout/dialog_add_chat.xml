@@ -22,8 +22,6 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        app:counterEnabled="true"
-        app:counterMaxLength="50"
         android:layout_below="@id/iv_feed"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

@@ -107,7 +107,7 @@ class MyBookFragment : Fragment() {
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     fun lv(){
-        binding.tvLevel.text=list.size.toString()
+        binding.tvLevel.text=""+list.size.toString()
         grade()
     }
 
@@ -128,6 +128,7 @@ class MyBookFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     fun dataLoad(){
         var firestore=FirebaseFirestore.getInstance()
         var reviewRef=firestore.collection("${G.userId}")
@@ -138,7 +139,7 @@ class MyBookFragment : Fragment() {
                 var title=reviews.get("title").toString()
                 var text=reviews.get("text").toString()
                 list.add(MyBookItem(Uri.parse(cover),title!!,text!!))
-                binding.tvLevel.text=list.size.toString()
+                binding.tvLevel.text=(list.size).toString()
                 grade()
             }
             adapter=MyBookAdapter(requireActivity(),list,binding)

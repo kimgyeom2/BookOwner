@@ -17,6 +17,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.gy25m.bookowner.G
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.adapters.ChatAdapter
@@ -28,6 +30,8 @@ import com.gy25m.bookowner.model.ChatItem
 class ChatFragment : Fragment() {
 
     private lateinit var binding:FragmentChatBinding
+    var chatItem= mutableListOf<ChatItem>()
+    lateinit var adapter:ChatAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,19 +44,20 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var dialogBinding=DialogAddChatBinding.inflate(layoutInflater)
+        dataload()
 
         val resultLauncher :ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),object :
                 ActivityResultCallback<ActivityResult> {
                 override fun onActivityResult(result: ActivityResult?) {
                     if (result?.resultCode == Activity.RESULT_CANCELED) return
-                    G.imgUri= result?.data?.data!!
-                    Glide.with(this@ChatFragment).load(G.imgUri).into(dialogBinding.ivFeed)
+                    G.img= result?.data?.data!!
+                    Glide.with(this@ChatFragment).load(G.img).into(dialogBinding.ivFeed)
                 }
             })
 
         var dia=AlertDialog.Builder(activity).setView(dialogBinding.root).create()
-        var chatItem= mutableListOf<ChatItem>()
+
         binding.btnAddReview.setOnClickListener {
             dia.show()
             dialogBinding.ivFeed.setOnClickListener {
@@ -60,19 +65,21 @@ class ChatFragment : Fragment() {
                 resultLauncher.launch(intent)
 
                 dialogBinding.btnConfirm.setOnClickListener {
-                    if (G.imgUri !=null && dialogBinding.etFeed.text.toString()!=""){
-                        chatItem.add(ChatItem(G.userId!!,G.imgUri.toString(),dialogBinding.etFeed.text.toString()))
-                        var adapter=ChatAdapter(chatItem,requireActivity())
-                        binding.recyclerReview.adapter=adapter
-                        adapter.notifyItemInserted(0)
+                    if (G.img !=null && dialogBinding.etFeed.text.toString()!=""){
+                        G.text=dialogBinding.etFeed.text.toString()
+                        chatItem.add(ChatItem(G.userId!!,G.img.toString(),G.text.toString()))
+                        adapter.notifyItemInserted(chatItem.size)
+                        binding.recyclerReview.scrollToPosition(chatItem.size-1)
                         datasave()
                         dialogBinding.etFeed.text=null
                         Glide.with(requireActivity()).load(R.drawable.icon_add).into(dialogBinding.ivFeed)
+                        dialogBinding.etFeed.clearFocus()
                         dia.dismiss()
                     }else{
                         Toast.makeText(requireContext(), "모든 항목을 입력하세요", Toast.LENGTH_SHORT).show()
                     }
                 }
+
                 dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
 
 
@@ -80,7 +87,33 @@ class ChatFragment : Fragment() {
         }
 
     }
+    var firestore=FirebaseFirestore.getInstance()
+    var chatRef=firestore.collection("feed")
+    var firestorage=FirebaseStorage.getInstance()
+    fun datasave(){
+        var map= mutableMapOf<String,String>()
+        map.put("id",G.userId.toString())
+        map.put("img",G.img.toString())
+        map.put("text",G.text.toString())
+        chatRef.document("feed_"+System.currentTimeMillis()).set(map)
 
-    fun datasave(){}
+        firestorage.getReference( ).putFile(G.img!!)
+    }
+    fun dataload(){
+        chatRef.get().addOnSuccessListener {
+
+            for(snapshot in it){
+                var feeds = snapshot.data
+                var id=feeds.get("id").toString()
+                var img=feeds.get("img").toString()
+                var text=feeds.get("text").toString()
+                chatItem.add(ChatItem(id,img,text))
+            }
+            adapter=ChatAdapter(chatItem,requireActivity())
+            binding.recyclerReview.adapter=adapter
+            binding.recyclerReview.scrollToPosition(chatItem.size-1)
+        }
+    }
+
 
 }

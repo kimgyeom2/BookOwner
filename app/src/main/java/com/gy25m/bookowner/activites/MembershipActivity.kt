@@ -32,10 +32,10 @@ class MembershipActivity : AppCompatActivity() {
             }else{
                 var fire=FirebaseFirestore.getInstance()
                 var ref=fire.collection("userInfo")
-                var info:MutableMap<String,String> = mutableMapOf()
+                var info:MutableMap<String,Any> = mutableMapOf()
                 info.put("id",binding.etId.text.toString())
                 info.put("pw",binding.etPw2.text.toString())
-                info.put("lv",""+0)
+                info.put("lv",0)
                 info.put("grade","")
                 ref.document(binding.etId.text.toString()).set(info)
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
@@ -49,15 +49,20 @@ class MembershipActivity : AppCompatActivity() {
 
         binding.btnCheck.setOnClickListener {
             var fire=FirebaseFirestore.getInstance()
-            fire.collection("userInfo").whereEqualTo("id",binding.etId.text.toString()).get().addOnSuccessListener {
-                if(it.documents.size==0){
-                    Toast.makeText(this, "사용가능한 ID입니다", Toast.LENGTH_SHORT).show()
-                    check=1
-                }else{
-                    Toast.makeText(this, "중복된 ID입니다", Toast.LENGTH_SHORT).show()
-                }
-            }
+            if (binding.etId.length()<=10) {
+                fire.collection("userInfo").whereEqualTo("id", binding.etId.text.toString()).get()
+                    .addOnSuccessListener {
+                        if (it.documents.size == 0) {
+                            Toast.makeText(this, "사용가능한 ID입니다", Toast.LENGTH_SHORT).show()
+                            check = 1
+                        } else {
+                            Toast.makeText(this, "중복된 ID입니다", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }else{
+                Toast.makeText(this, "ID길이를 줄여주세요", Toast.LENGTH_SHORT).show()}
         } //btncheck
+            
 
 
     }

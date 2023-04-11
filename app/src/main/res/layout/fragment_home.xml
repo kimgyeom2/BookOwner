@@ -140,30 +140,31 @@
               android:id="@+id/first"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-               android:text="1등     zxc    lv1     Bronze"
+               android:text="1등"
               android:textSize="18sp"
               android:layout_marginBottom="8dp"
               android:textColor="@color/black"
-              android:fontFamily="@font/app_name"/>
+              android:fontFamily="@font/main2bold"/>
           <TextView
               android:id="@+id/second"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="2등     zxc    lv1     Bronze"
+              android:text="2등"
               android:textSize="18sp"
               android:layout_marginBottom="8dp"
               android:textColor="@color/black"
-              android:fontFamily="@font/app_name"/>
+              android:fontFamily="@font/main2bold"/>
           <TextView
               android:id="@+id/third"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="3등    zxc    lv1     Bronze"
+              android:text="3등"
               android:textSize="18sp"
               android:layout_marginBottom="8dp"
               android:textColor="@color/black"
-              android:fontFamily="@font/app_name"
+              android:fontFamily="@font/main2bold"
               />
+
 
      </LinearLayout>
 

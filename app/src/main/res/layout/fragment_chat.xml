@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btn_add_review"
-        android:padding="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical" />
 
@@ -20,7 +22,7 @@
         android:background="@drawable/join_btn"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:text="리뷰 추가하기"
         android:textColor="@color/white"
         android:textSize="20sp"
