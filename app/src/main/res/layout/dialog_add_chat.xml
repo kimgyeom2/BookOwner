@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="380dp"
-    android:layout_height="480dp"
+    android:layout_height="460dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_horizontal"
     android:background="#EAF7FF">
@@ -20,7 +20,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_review"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/iv_feed"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

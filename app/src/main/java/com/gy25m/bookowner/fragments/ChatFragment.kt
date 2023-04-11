@@ -62,7 +62,7 @@ class ChatFragment : Fragment() {
             dia.show()
             dialogBinding.ivFeed.setOnClickListener {
                 val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
-                resultLauncher.launch(intent)
+                resultLauncher.launch(intent)}
 
                 dialogBinding.btnConfirm.setOnClickListener {
                     if (G.img !=null && dialogBinding.etFeed.text.toString()!=""){
@@ -80,10 +80,7 @@ class ChatFragment : Fragment() {
                     }
                 }
 
-                dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
-
-
-            }
+            dialogBinding.btnCancel.setOnClickListener { dia.dismiss() }
         }
 
     }
@@ -91,13 +88,19 @@ class ChatFragment : Fragment() {
     var chatRef=firestore.collection("feed")
     var firestorage=FirebaseStorage.getInstance()
     fun datasave(){
-        var map= mutableMapOf<String,String>()
-        map.put("id",G.userId.toString())
-        map.put("img",G.img.toString())
-        map.put("text",G.text.toString())
-        chatRef.document("feed_"+System.currentTimeMillis()).set(map)
 
-        firestorage.getReference( ).putFile(G.img!!)
+        var name="img_"+System.currentTimeMillis()
+        firestorage.getReference(name).putFile(G.img!!).addOnSuccessListener {
+            firestorage.getReference(name).downloadUrl.addOnSuccessListener {
+
+                var map= mutableMapOf<String,String>()
+                map.put("id",G.userId.toString())
+                map.put("img",it.toString())
+                map.put("text",G.text.toString())
+                chatRef.document("feed_"+System.currentTimeMillis()).set(map)
+
+            }
+        }
     }
     fun dataload(){
         chatRef.get().addOnSuccessListener {

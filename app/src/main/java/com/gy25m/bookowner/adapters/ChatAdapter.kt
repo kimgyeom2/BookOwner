@@ -33,7 +33,7 @@ class ChatAdapter(private var chatItem: MutableList<ChatItem>, var context: Cont
         holder.binding.btnHt.setOnClickListener {
             it.isSelected = it.isSelected==false
         }
-
+         var time=System.currentTimeMillis().toString()
         holder.binding.btnChat.setOnClickListener {
             var intent=Intent(context,CommentActivity::class.java)
             intent.putExtra("img",item.img)

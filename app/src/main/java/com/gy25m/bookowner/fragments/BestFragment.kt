@@ -42,7 +42,9 @@ class BestFragment : Fragment() {
                 response: Response<AladinBookList>
             ) {
                 val ala=response.body()
-                binding.recyclerBest.adapter=BestAdapter(activity as MainActivity,ala!!.item)
+                if (ala != null) {
+                    binding.recyclerBest.adapter=BestAdapter(activity as MainActivity,ala.item)
+                }
             }
             override fun onFailure(call: Call<AladinBookList>, t: Throwable) {
                 Toast.makeText(requireActivity(), "실패", Toast.LENGTH_SHORT).show()
