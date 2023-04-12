@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_review"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btn_add_review"
-        android:padding="16dp"/>
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_review"
@@ -17,7 +22,8 @@
         android:background="@drawable/join_btn"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="리뷰 추가하기"
         android:textColor="@color/white"
         android:textSize="20sp"

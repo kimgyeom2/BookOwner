@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivityMainBinding
+import com.gy25m.bookowner.fragments.BestFragment
 import com.gy25m.bookowner.fragments.ChatFragment
 import com.gy25m.bookowner.fragments.FavorFragment
 import com.gy25m.bookowner.fragments.HomeFragment
@@ -23,9 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         bnvControl()
-
+        openOrCreateDatabase("interest", MODE_PRIVATE,null)
     }
 
     private fun bnvControl(){

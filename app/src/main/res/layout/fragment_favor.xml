@@ -5,10 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_favor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         android:orientation="vertical"
-        app:spanCount="2"/>
+        app:spanCount="2"
+        android:padding="8dp"/>
 
 </RelativeLayout>

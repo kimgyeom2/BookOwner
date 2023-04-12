@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:layout_height="230dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:backgroundTint="#FFFFFF"
+    android:layout_margin="8dp"
+    app:cardElevation="0dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="202dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="#AAC5E3" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="157dp"
+        android:layout_height="206dp"
+        android:background="#EAF7FF">
+    <ImageView
+        android:id="@+id/iv_favor_cover"
+        android:layout_width="120dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="12dp"
+        android:src="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:id="@+id/tv_favor_title"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="책제목책제목책제목책제목책제목제목책제목모모모모모모목"
+        android:textColor="@color/black"
+        android:fontFamily="@font/main2bold"
+        android:textSize="14sp"
+        android:layout_below="@id/iv_favor_cover"
+        android:layout_marginTop="6dp"
+        android:layout_alignLeft="@id/iv_favor_cover"
+        android:layout_alignRight="@id/iv_favor_cover"
+        android:maxLines="2"/>
+
+        <ImageButton
+            android:id="@+id/heart"
+            android:layout_width="20dp"
+            android:layout_height="16dp"
+            android:background="@drawable/icon_favorite_selected"
+            android:layout_toRightOf="@id/tv_favor_title"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="2dp"/>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
