@@ -100,7 +100,7 @@ class ChatFragment : Fragment() {
                 map.put("id",G.userId.toString())
                 map.put("img",it.toString())
                 map.put("text",G.text.toString())
-                map.put("tag", "feed_$feedtag")
+                map.put("tag",feedtag)
                 chatRef.document("feed_$feedtag").set(map)
 
             }

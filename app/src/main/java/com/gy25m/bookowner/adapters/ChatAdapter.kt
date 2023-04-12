@@ -41,7 +41,6 @@ class ChatAdapter(private var chatItem: MutableList<ChatItem>, var context: Cont
             intent.putExtra("text",item.text)
             intent.putExtra("tag",item.tag)
             context.startActivity(intent)
-            Log.i("zzzzzzzzz",item.img)
         }
     }
 }

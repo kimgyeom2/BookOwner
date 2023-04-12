@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="#EAF7FF"
     android:layout_gravity="center_horizontal"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="12dp">
 
     <TextView
         android:id="@+id/id"
@@ -12,13 +12,14 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_marginBottom="2dp"
+        android:textSize="16sp"
         android:layout_marginLeft="6dp"
         android:text="zxc님의 게시글입니다" />
 
     <ImageView
         android:id="@+id/iv_chat"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="260dp"
         android:layout_below="@id/id"
         android:scaleType="fitXY"
         android:src="#BED4DD" />
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_chat"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:padding="4dp"

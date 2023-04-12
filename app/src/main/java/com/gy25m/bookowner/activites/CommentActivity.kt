@@ -29,7 +29,7 @@ class CommentActivity : AppCompatActivity() {
         var fire=FirebaseFirestore.getInstance()
         var comRef=fire.collection("reply")
 
-        comRef.get().addOnSuccessListener {
+        comRef.whereEqualTo("tag",tag).get().addOnSuccessListener {
             for (snapshot in it){
                 var map:MutableMap<String,Any> = snapshot.data
                 var id=map.get("id")
@@ -45,6 +45,7 @@ class CommentActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener { finish() }
         binding.btnSend.setOnClickListener {
+            var tag=intent.getStringExtra("tag")
             replys.add(CommentItem(G.userId.toString(),binding.etComment.text.toString()))
 
             adapter.notifyItemInserted(replys.size)
