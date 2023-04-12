@@ -20,7 +20,7 @@ import com.gy25m.bookowner.model.MyBookItem
 
 class MyBookAdapter(var context:Context,var list:MutableList<MyBookItem>,var bind:FragmentMybookBinding) : Adapter<MyBookAdapter.VH>() {
     private var firestore = FirebaseFirestore.getInstance()
-    private var reviewRef = firestore.collection("${G.userId}")
+    private var reviewRef = firestore.collection("book")
     private var userRef = firestore.collection("userInfo")
 
     inner class VH(var binding: RecycleritemMybookBinding) : ViewHolder(binding.root)

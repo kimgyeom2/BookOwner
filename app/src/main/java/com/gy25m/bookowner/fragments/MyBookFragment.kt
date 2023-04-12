@@ -3,12 +3,10 @@ package com.gy25m.bookowner.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.telephony.TelephonyManager.ModemErrorException
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,18 +22,18 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.gy25m.bookowner.G
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.adapters.MyBookAdapter
 import com.gy25m.bookowner.databinding.DialogAddBookBinding
 import com.gy25m.bookowner.databinding.FragmentMybookBinding
 import com.gy25m.bookowner.model.MyBookItem
-import org.checkerframework.checker.units.qual.A
-import java.util.prefs.Preferences
+
 
 class MyBookFragment : Fragment() {
     private var firestore=FirebaseFirestore.getInstance()
-    private var reviewRef:CollectionReference=firestore.collection("${G.userId}")
+    private var reviewRef:CollectionReference=firestore.collection("book")
     private lateinit var binding: FragmentMybookBinding
     var reviews:MutableMap<String,String> = mutableMapOf()
     var list: MutableList<MyBookItem> = mutableListOf()
@@ -86,7 +84,7 @@ class MyBookFragment : Fragment() {
                 G.title=dialogBinding.etTitle.text.toString()
                 G.review=dialogBinding.etReviewreal.text.toString()
                 if (G.imgUri !=null && dialogBinding.etTitle.text.toString()!="" && dialogBinding.etReviewreal.text.toString()!="" ){
-                    list.add(MyBookItem(G.imgUri!!,G.title!!,G.review!!))
+                    list.add(MyBookItem(G.imgUri.toString(),G.title!!,G.review!!))
                     adapter.notifyItemInserted(list.size)
                     binding.recyclerMybook.scrollToPosition(0)
 
@@ -114,31 +112,40 @@ class MyBookFragment : Fragment() {
 
 
     fun dataSave(){
+        var name="img_"+System.currentTimeMillis()
+        var firestorage=FirebaseStorage.getInstance()
+        firestorage.getReference(name).putFile(G.imgUri!!).addOnSuccessListener {
+            firestorage.getReference(name).downloadUrl.addOnSuccessListener {
+                var docpath="MSG_"+System.currentTimeMillis()
+                reviews.put("id",G.userId.toString())
+                reviews.put("cover",it.toString())
+                reviews.put("title",G.title!!)
+                reviews.put("text",G.review!!)
+                reviews.put("docpath",docpath)
+                reviewRef.document(docpath).set(reviews)
 
-        var docpath="MSG_"+System.currentTimeMillis()
-        reviews.put("cover",G.imgUri!!.toString())
-        reviews.put("title",G.title!!)
-        reviews.put("text",G.review!!)
-        reviews.put("docpath",docpath)
-        reviewRef.document(docpath).set(reviews)
-        binding.recyclerMybook.scrollToPosition(list.size-1)
+                binding.recyclerMybook.scrollToPosition(list.size-1)
 
-        firestore.collection("userInfo").document("${G.userId}").update("lv",list.size)
-        firestore.collection("userInfo").document("${G.userId}").update("grade",binding.tvGrade.text)
+                firestore.collection("userInfo").document("${G.userId}").update("lv",list.size)
+                firestore.collection("userInfo").document("${G.userId}").update("grade",binding.tvGrade.text)
+            }
+        }
+
+
 
     }
 
     @SuppressLint("SetTextI18n")
     fun dataLoad(){
         var firestore=FirebaseFirestore.getInstance()
-        var reviewRef=firestore.collection("${G.userId}")
-        reviewRef.get().addOnSuccessListener {
+        var reviewRef=firestore.collection("book")
+        reviewRef.whereEqualTo("id",G.userId.toString()).get().addOnSuccessListener {
             for (snapshot in it){
                 var reviews:MutableMap<String,Any> = snapshot.data
                 var cover=reviews.get("cover").toString()
                 var title=reviews.get("title").toString()
                 var text=reviews.get("text").toString()
-                list.add(MyBookItem(Uri.parse(cover),title!!,text!!))
+                list.add(MyBookItem(cover,title!!,text!!))
                 binding.tvLevel.text=(list.size).toString()
                 grade()
             }

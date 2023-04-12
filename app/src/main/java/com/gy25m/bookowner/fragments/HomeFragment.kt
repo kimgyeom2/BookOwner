@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
         var main=requireActivity() as MainActivity
         main.supportFragmentManager.beginTransaction().replace(binding.frame.id,BestFragment()).commit()
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
-
             search()
             false
         }

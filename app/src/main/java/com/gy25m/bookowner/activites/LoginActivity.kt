@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                                     var aa: MutableMap<String, Any> = snapshot.data
                                     if (aa.get("pw").toString() == binding.etPw.text.toString()) {
                                         G.userId = binding.etId.text.toString()
-                                        Toast.makeText(this, "로그인 성공+${G.userId}", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this, "환영합니다", Toast.LENGTH_SHORT).show()
                                         finishAffinity()
                                         startActivity(Intent(this, MainActivity::class.java))
 

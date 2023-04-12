@@ -89,6 +89,7 @@
             android:hint="메세지"
             android:padding="10dp"
             android:inputType="textMultiLine"
+            android:imeOptions="actionSend"
             android:maxLines="3"
             android:layout_gravity="center_vertical"/>
 
