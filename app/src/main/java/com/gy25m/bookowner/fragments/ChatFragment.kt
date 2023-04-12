@@ -32,6 +32,7 @@ class ChatFragment : Fragment() {
     private lateinit var binding:FragmentChatBinding
     var chatItem= mutableListOf<ChatItem>()
     lateinit var adapter:ChatAdapter
+    var feedtag=""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,7 +68,8 @@ class ChatFragment : Fragment() {
                 dialogBinding.btnConfirm.setOnClickListener {
                     if (G.img !=null && dialogBinding.etFeed.text.toString()!=""){
                         G.text=dialogBinding.etFeed.text.toString()
-                        chatItem.add(ChatItem(G.userId!!,G.img.toString(),G.text.toString()))
+                        feedtag=System.currentTimeMillis().toString()
+                        chatItem.add(ChatItem(G.userId!!,G.img.toString(),G.text.toString(),feedtag))
                         adapter.notifyItemInserted(chatItem.size)
                         binding.recyclerReview.scrollToPosition(chatItem.size-1)
                         datasave()
@@ -87,6 +89,7 @@ class ChatFragment : Fragment() {
     var firestore=FirebaseFirestore.getInstance()
     var chatRef=firestore.collection("feed")
     var firestorage=FirebaseStorage.getInstance()
+
     fun datasave(){
 
         var name="img_"+System.currentTimeMillis()
@@ -97,7 +100,8 @@ class ChatFragment : Fragment() {
                 map.put("id",G.userId.toString())
                 map.put("img",it.toString())
                 map.put("text",G.text.toString())
-                chatRef.document("feed_"+System.currentTimeMillis()).set(map)
+                map.put("tag", "feed_$feedtag")
+                chatRef.document("feed_$feedtag").set(map)
 
             }
         }
@@ -110,7 +114,8 @@ class ChatFragment : Fragment() {
                 var id=feeds.get("id").toString()
                 var img=feeds.get("img").toString()
                 var text=feeds.get("text").toString()
-                chatItem.add(ChatItem(id,img,text))
+                var tag=feeds.get("tag").toString()
+                chatItem.add(ChatItem(id,img,text,tag))
             }
             adapter=ChatAdapter(chatItem,requireActivity())
             binding.recyclerReview.adapter=adapter

@@ -10,5 +10,6 @@ class G {
         var userId:String?=null
         var text:String?=null
         var img:Uri?=null
+        var tag:String?=null
     }
 }
