@@ -142,7 +142,7 @@
               android:layout_height="wrap_content"
                android:text="1등"
               android:textSize="18sp"
-              android:layout_marginBottom="10dp"
+              android:layout_marginBottom="9dp"
               android:textColor="#ECDE64"
               android:fontFamily="@font/main2bold"/>
           <TextView
@@ -151,7 +151,7 @@
               android:layout_height="wrap_content"
               android:text="2등"
               android:textSize="18sp"
-              android:layout_marginBottom="10dp"
+              android:layout_marginBottom="9dp"
               android:textColor="@color/silver"
               android:fontFamily="@font/main2bold"/>
           <TextView

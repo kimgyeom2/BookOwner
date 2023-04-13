@@ -42,10 +42,7 @@ class MapActivity : AppCompatActivity() {
         binding= ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mapView: MapView by lazy { MapView(this) }
-
-
-
+        binding.ivBefore.setOnClickListener { finish() }
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_DENIED){
             // 퍼미션 요청 대행사 이용-계약 체결
             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -53,6 +50,9 @@ class MapActivity : AppCompatActivity() {
             // 내 위치 요청
             requestMyLocation()
         }
+
+        val mapView: MapView by lazy { MapView(this) }
+        binding.mapView.addView(mapView)
 
         var lat:Double = myLocation?.latitude  ?: 37.5663
         var lng:Double = myLocation?.longitude ?: 126.9779
@@ -87,7 +87,9 @@ class MapActivity : AppCompatActivity() {
             mapView.addPOIItem(marker)
         }
 
-        binding.mapView.addView(mapView)
+
+
+
     }//oncreate
 
 
@@ -102,17 +104,6 @@ class MapActivity : AppCompatActivity() {
         ).show()
     }
 
-    private val locationCallback: LocationCallback =object : LocationCallback(){
-        override fun onLocationResult(p0: LocationResult) {
-            super.onLocationResult(p0)
-            myLocation=p0.lastLocation
-
-            //위치 탐색되었으니 실시간 업데이트를 종료
-            providerClient.removeLocationUpdates(this) //this : locationCallback 객체
-
-            searchPlace()
-        }
-    }
     private fun requestMyLocation(){
         // 위치검색 기준 설정하는 요청객체
         val request: LocationRequest =
@@ -132,9 +123,20 @@ class MapActivity : AppCompatActivity() {
         providerClient.requestLocationUpdates(request,locationCallback, Looper.getMainLooper())
     }
 
+    private val locationCallback: LocationCallback =object : LocationCallback(){
+        override fun onLocationResult(p0: LocationResult) {
+            super.onLocationResult(p0)
+            myLocation=p0.lastLocation
+
+            //위치 탐색되었으니 실시간 업데이트를 종료
+            providerClient.removeLocationUpdates(this) //this : locationCallback 객체
+
+            searchPlace()
+        }
+    }
+
+
     private fun searchPlace(){
-        // Toast.makeText(this, "$searchQuery - ${myLocation?.latitude} , ${myLocation?.longitude}", Toast.LENGTH_SHORT).show()
-        // Kakao keyword place search api.. Rest API작업 - Retrofit
         val retrofit: Retrofit =RetrofitHelper.getRetrofitInstance("https://dapi.kakao.com")
         val retrofitApiservice=retrofit.create(RetrofitApiService::class.java)
         retrofitApiservice.searchplace(searchQuery,myLocation?.latitude.toString(),myLocation?.longitude.toString()).enqueue(object :
@@ -144,6 +146,7 @@ class MapActivity : AppCompatActivity() {
                 response: Response<KakaoSearchPlaceResponse>
             ) {
                 searchPlaceResponse=response.body()
+
                 //Toast.makeText(this@MainActivity, "${searchPlaceResponse?.meta?.total_count}", Toast.LENGTH_SHORT).show()
 
             }
@@ -154,5 +157,7 @@ class MapActivity : AppCompatActivity() {
         })
 
     }
+
+
 
 }

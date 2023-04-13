@@ -20,7 +20,7 @@ class CommentAdapter(var context: Context,var items:MutableList<CommentItem>) : 
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         var item=items[position]
-        holder.binding.replyId.text=item.id+"님의 댓글"
+        holder.binding.replyId.text=item.id
         holder.binding.replyText.text=item.text
     }
 }

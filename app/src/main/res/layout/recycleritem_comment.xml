@@ -10,8 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="ID입니다"
+
+        android:text="ID"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="님의 댓글"
+        android:layout_toRightOf="@id/reply_id"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="16sp" />
     <TextView
