@@ -1,20 +1,19 @@
 package com.gy25m.bookowner.activites
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.location.Location
 import android.os.Bundle
-import android.view.MenuItem
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.firestore.FirebaseFirestore
 import com.gy25m.bookowner.R
 import com.gy25m.bookowner.databinding.ActivityMainBinding
-import com.gy25m.bookowner.fragments.BestFragment
 import com.gy25m.bookowner.fragments.ChatFragment
 import com.gy25m.bookowner.fragments.FavorFragment
 import com.gy25m.bookowner.fragments.HomeFragment
 import com.gy25m.bookowner.fragments.MyBookFragment
-import kotlinx.coroutines.selects.select
+import com.kakao.util.maps.helper.Utility
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         bnvControl()
         openOrCreateDatabase("interest", MODE_PRIVATE,null)
+
+        binding.btnBookstore.setOnClickListener {
+            startActivity(Intent(this,MapActivity::class.java))
+        }
     }
 
     private fun bnvControl(){
