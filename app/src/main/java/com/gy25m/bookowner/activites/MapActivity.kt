@@ -1,11 +1,14 @@
 package com.gy25m.bookowner.activites
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
@@ -26,6 +29,7 @@ import com.gy25m.bookowner.network.RetrofitHelper
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import net.daum.mf.map.api.MapView.POIItemEventListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,48 +54,17 @@ class MapActivity : AppCompatActivity() {
         }else{
             // 내 위치 요청
             requestMyLocation()
-        }
-        binding.mapView.addView(mapView)
-
-        var lat:Double = myLocation?.latitude  ?: 37.5663
-        var lng:Double = myLocation?.longitude ?: 126.9779
-        val mp= MapPoint.mapPointWithGeoCoord(lat,lng)
-        mapView.setMapCenterPointAndZoomLevel(mp,5,false)
-        mapView.zoomIn(true)
-        mapView.zoomOut(true)
-
-        var marker= MapPOIItem()
-        marker.apply {
-            itemName="ME"
-            mapPoint=mp
-            markerType= MapPOIItem.MarkerType.BluePin
-            selectedMarkerType= MapPOIItem.MarkerType.RedPin
-        }
-        mapView.addPOIItem(marker)
-
-        // 검색 장소들의 마커 추가
-        val documents:MutableList<Place>? = searchPlaceResponse?.documents
-        documents?.forEach {
-            val point:MapPoint=MapPoint.mapPointWithGeoCoord(it.y.toDouble(),it.x.toDouble())
-
-            var marker= MapPOIItem().apply {
-                mapPoint=point
-                itemName=it.place_name
-                markerType= MapPOIItem.MarkerType.YellowPin
-                selectedMarkerType= MapPOIItem.MarkerType.RedPin
-                // 마커객체에 보관하고 싶은 데이터가 있다면
-                // 즉. 해당 마커에 관련된 정보를 가지고있는 객체를 마커에 저장해놓기
-                userObject=it
-            }
-            mapView.addPOIItem(marker)
+            binding.mapView.addView(mapView)
         }
 
     }//oncreate
 
+
     val permissionLauncher: ActivityResultLauncher<String> =registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { result ->
-        if (result!!) requestMyLocation()
+        if (result!!) {requestMyLocation()
+            Toast.makeText(this@MapActivity, "동의", Toast.LENGTH_SHORT).show()}
         else Toast.makeText(
             this@MapActivity,
             "위치정보 제공에 동의하지 않았습니다. 검색기능이 제한됩니다",
@@ -114,16 +87,17 @@ class MapActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return
-        }   // if문 error클릭 자동완성
+        }
         providerClient.requestLocationUpdates(request,locationCallback, Looper.getMainLooper())
+
     }
 
 
     private val locationCallback: LocationCallback =object : LocationCallback(){
         override fun onLocationResult(p0: LocationResult) {
             super.onLocationResult(p0)
-            myLocation=p0.lastLocation
-
+            myLocation= p0.lastLocation
+            Log.i("fff",myLocation.toString())
             //위치 탐색되었으니 실시간 업데이트를 종료
             providerClient.removeLocationUpdates(this) //this : locationCallback 객체
 
@@ -133,14 +107,15 @@ class MapActivity : AppCompatActivity() {
     private fun searchPlace(){
         val retrofit: Retrofit = RetrofitHelper.getRetrofitInstance("https://dapi.kakao.com")
         val retrofitApiservice=retrofit.create(RetrofitApiService::class.java)
-        retrofitApiservice.searchplace(searchQuery,myLocation?.latitude.toString(),myLocation?.longitude.toString()).enqueue(object :
+        retrofitApiservice.searchplace(searchQuery, myLocation?.latitude.toString(),myLocation?.longitude.toString()).enqueue(object :
             Callback<KakaoSearchPlaceResponse> {
             override fun onResponse(
                 call: Call<KakaoSearchPlaceResponse>,
                 response: Response<KakaoSearchPlaceResponse>
             ) {
                 searchPlaceResponse=response.body()
-
+                mapView.setPOIItemEventListener(markerEventListener)
+                setMapAndMarkers()
                 //Toast.makeText(this@MainActivity, "${searchPlaceResponse?.meta?.total_count}", Toast.LENGTH_SHORT).show()
 
             }
@@ -152,8 +127,63 @@ class MapActivity : AppCompatActivity() {
 
     }
 
+    fun setMapAndMarkers(){
+        var lat:Double = myLocation?.latitude  ?: 37.5663
+        var lng:Double = myLocation?.longitude ?: 126.9779
+        val mp= MapPoint.mapPointWithGeoCoord(lat,lng)
+        mapView.setMapCenterPointAndZoomLevel(mp,5,false)
+        mapView.zoomIn(true)
+        mapView.zoomOut(true)
 
+        var marker= MapPOIItem()
+        marker.apply {
+            itemName="ME"
+            mapPoint=mp
+            markerType= MapPOIItem.MarkerType.RedPin
+            selectedMarkerType= MapPOIItem.MarkerType.YellowPin
+        }
+        mapView.addPOIItem(marker)
 
+        // 검색 장소들의 마커 추가
+        val documents:MutableList<Place>? = searchPlaceResponse?.documents
+        documents?.forEach {
+            val point:MapPoint=MapPoint.mapPointWithGeoCoord(it.y.toDouble(),it.x.toDouble())
+
+            var marker= MapPOIItem().apply {
+                mapPoint=point
+                itemName=it.place_name
+                markerType= MapPOIItem.MarkerType.BluePin
+                selectedMarkerType= MapPOIItem.MarkerType.RedPin
+                // 마커객체에 보관하고 싶은 데이터가 있다면
+                // 즉. 해당 마커에 관련된 정보를 가지고있는 객체를 마커에 저장해놓기
+                userObject=it
+            }
+            mapView.addPOIItem(marker)
+        }
+    }
+    val markerEventListener=object : POIItemEventListener{
+        override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+        }
+
+        override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+        }
+
+        override fun onCalloutBalloonOfPOIItemTouched(
+            p0: MapView?,
+            p1: MapPOIItem?,
+            p2: MapPOIItem.CalloutBalloonButtonType?
+        ) {
+            p1?.userObject ?: return
+
+            var place=p1?.userObject as Place
+            var intent=Intent(this@MapActivity,PlaceUrlActivity::class.java)
+            intent.putExtra("place_url",place.place_url)
+            startActivity(intent)
+        }
+
+        override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+        }
+    }
 
 
 
