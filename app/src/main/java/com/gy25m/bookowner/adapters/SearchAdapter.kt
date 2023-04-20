@@ -38,7 +38,10 @@ class SearchAdapter(var context:Context,var items:MutableList<Book>) : Adapter<S
         holder.binding.ivFavor.setOnClickListener {
             Toast.makeText(context, "관심도서 추가!", Toast.LENGTH_SHORT).show()
             var db=context.openOrCreateDatabase("interest",MODE_PRIVATE,null)
-            db.execSQL("INSERT INTO book (cover,title,description) VALUES ('${item.cover}','${item.title}','${item.description}')")
+            var cover=item.cover.replace("'","")
+            var title=item.title.replace("'","")
+            var description=item.description.replace("'","")
+            db.execSQL("INSERT INTO book (cover,title,description) VALUES ('${cover}','${title}','${description}')")
 
          }
 

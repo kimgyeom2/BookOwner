@@ -91,7 +91,7 @@
             android:layout_toRightOf="@id/tv_bronze"
             android:fontFamily="@font/main2bold"
             android:gravity="right"
-            android:text="독서 Lv      1-3"
+            android:text="독서 Lv      0-3"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -103,7 +103,7 @@
             android:layout_toRightOf="@id/tv_silver"
             android:fontFamily="@font/main2bold"
             android:gravity="right"
-            android:text="독서 Lv    4-10"
+            android:text="독서 Lv    4-7"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -115,7 +115,7 @@
             android:layout_toRightOf="@id/tv_gold"
             android:fontFamily="@font/main2bold"
             android:gravity="right"
-            android:text="독서 Lv   11-16"
+            android:text="독서 Lv   8-12"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -127,7 +127,7 @@
             android:layout_toRightOf="@id/tv_platinum"
             android:fontFamily="@font/main2bold"
             android:gravity="right"
-            android:text="독서 Lv  17-25"
+            android:text="독서 Lv  13-24"
             android:textColor="@color/black"
             android:textSize="20sp" />
 

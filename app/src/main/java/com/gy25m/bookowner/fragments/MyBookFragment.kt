@@ -164,10 +164,10 @@ class MyBookFragment : Fragment() {
         } else if (list.size in 8 until 13) {
             binding.tvGrade.setTextColor(Color.parseColor("#F4E23C"))
             binding.tvGrade.text = "Gold"
-        } else if (list.size in 13 until 19) {
+        } else if (list.size in 13 until 25) {
             binding.tvGrade.setTextColor(Color.parseColor("#13BCAC"))
             binding.tvGrade.text = "Platinum"
-        } else if (list.size >= 30) {
+        } else if (list.size >= 25) {
             binding.tvGrade.setTextColor(Color.parseColor("#53B5E1"))
             binding.tvGrade.text = "Diamond"
         }

@@ -11,10 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:layout_marginBottom="4dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="3dp"
+        android:text="zxc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginBottom="2dp"
         android:textSize="16sp"
-        android:layout_marginLeft="6dp"
-        android:text="zxc님의 게시글입니다" />
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/id"
+        android:text="님의 게시글입니다" />
 
     <ImageView
         android:id="@+id/iv_chat"
@@ -43,14 +55,13 @@
 
     <TextView
         android:id="@+id/tv_chat"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_chat"
         android:textColor="@color/black"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8sp"
         android:textSize="16sp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:padding="4dp"
         android:maxLines="3"
         android:text="안녕안녕안안녕안녕안안녕안녕녕녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕"/>
 </RelativeLayout>

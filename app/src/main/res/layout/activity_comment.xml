@@ -50,6 +50,7 @@
         android:textColor="@color/black"
         android:layout_toRightOf="@id/civ"
         android:layout_alignTop="@id/civ"
+        android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginLeft="10dp"/>
 
