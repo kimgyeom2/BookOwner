@@ -1,16 +1,12 @@
 package com.gy25m.bookowner.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.gy25m.bookowner.G
-import com.gy25m.bookowner.R
 import com.gy25m.bookowner.activites.CommentActivity
 import com.gy25m.bookowner.databinding.RecycleritemChatBinding
 import com.gy25m.bookowner.model.ChatItem
@@ -30,8 +26,17 @@ class ChatAdapter(private var chatItem: MutableList<ChatItem>, var context: Cont
         holder.binding.tvChat.text=item.text
         Glide.with(context).load(item.img).into(holder.binding.ivChat)
 
+        var pref=context.getSharedPreferences(item.id,Context.MODE_PRIVATE)
+        var editor=pref.edit()
+
+        if (pref.getString(item.tag,"0")=="1") holder.binding.btnHt.isSelected=true
         holder.binding.btnHt.setOnClickListener {
-            it.isSelected = it.isSelected==false
+            if (pref.getString(item.tag,"0")=="0"){it.isSelected=true
+                editor.putString(item.tag,"1")
+                editor.apply()}
+            else {it.isSelected=false
+                editor.putString(item.tag,"0")
+                editor.apply()}
         }
 
         holder.binding.btnChat.setOnClickListener {
