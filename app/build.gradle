@@ -66,4 +66,6 @@ dependencies {
 
     //kakao
     implementation files('libs/libDaumMapAndroid.jar')
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
 }
