@@ -51,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tv_bg"
         android:layout_marginTop="18dp"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         android:hint="ID를 입력하세요"
         android:layout_centerHorizontal="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -67,8 +69,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_join_id"
+        app:boxStrokeColor="@color/black"
         android:layout_marginTop="16dp"
         android:hint="Password를 입력하세요"
+        app:hintTextColor="@color/black"
         app:endIconMode="password_toggle"
         android:layout_centerHorizontal="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
